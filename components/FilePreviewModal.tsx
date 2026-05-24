@@ -50,26 +50,26 @@ const FilePreviewModal: React.FC<FilePreviewModalProps> = ({ file, onClose }) =>
             </div>
             <h3 className="font-semibold text-lg truncate drop-shadow-md">{file.name}</h3>
           </div>
-          
+
           <div className="flex items-center gap-2">
-            <button 
+            <button
               onClick={handleDownload}
-              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all hover:-translate-y-1 hover:scale-105 active:scale-95"
               title="Download / Open Original"
             >
               <Download size={20} />
             </button>
-            <button 
+            <button
               onClick={() => window.open(file.downloadURL, '_blank')}
-              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all hover:-translate-y-1 hover:scale-105 active:scale-95"
               title="Open in New Tab"
             >
               <ExternalLink size={20} />
             </button>
             <div className="w-px h-6 bg-white/20 mx-2" />
-            <button 
+            <button
               onClick={onClose}
-              className="p-2 text-white/70 hover:text-white hover:bg-red-500/20 rounded-full transition-all"
+              className="p-2 text-white/70 hover:text-white hover:bg-red-500/20 rounded-lg transition-all hover:-translate-y-1 hover:scale-105 active:scale-95"
             >
               <X size={24} />
             </button>
@@ -106,9 +106,9 @@ const FilePreviewModal: React.FC<FilePreviewModalProps> = ({ file, onClose }) =>
             {!isImage && !isPDF && (
                <div className="text-center text-slate-400">
                  <p className="mb-4">Preview not available for this file type.</p>
-                 <button 
+                 <button
                    onClick={handleDownload}
-                   className="px-6 py-2 bg-red-900 text-white rounded-lg font-semibold hover:bg-red-800 transition-colors"
+                   className="px-6 py-2 bg-red-900 text-white rounded-lg font-semibold hover:bg-red-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20"
                  >
                    Download File
                  </button>

@@ -525,22 +525,22 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
   const renderOverview = () => (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {/* Security Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
           <div className="w-10 h-10 bg-red-50 text-red-900 rounded-lg flex items-center justify-center mb-4">
             <Shield size={20} />
           </div>
           <h3 className="text-lg font-bold text-slate-900 mb-1">Vault Status</h3>
           <p className="text-sm text-slate-500 mb-4">Your environment is secure and encrypted.</p>
-          <div className="flex items-center gap-2 text-xs font-semibold text-red-900 bg-red-50 px-2 py-1 rounded w-fit">
+          <div className="flex items-center gap-2 text-xs font-semibold text-red-900 bg-red-50 px-2 py-1 rounded-lg w-fit">
             <div className="w-1.5 h-1.5 rounded-full bg-red-800" />
             Active Protection
           </div>
         </div>
 
         {/* Storage Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
           <div className="w-10 h-10 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center mb-4">
             <HardDrive size={20} />
           </div>
@@ -553,7 +553,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Team Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
           <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-4">
              <Users size={20} />
           </div>
@@ -565,16 +565,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-red-800/10 rounded-full blur-3xl -mr-16 -mt-16" />
         <div className="relative z-10">
            <h3 className="text-xl font-bold mb-2">Welcome to SunnSafe 2.0</h3>
            <p className="text-slate-400 max-w-lg mb-6">
              You now have full access to the new file management system, secure notes, and team collaboration tools.
            </p>
-           <button 
+           <button
              onClick={() => setActiveTab('files')}
-             className="px-5 py-2.5 bg-red-900 hover:bg-red-800 text-white rounded-xl font-semibold transition-colors flex items-center gap-2"
+             className="px-6 py-2.5 bg-red-900 hover:bg-red-800 text-white rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20"
            >
              Start Uploading
              <Upload size={16} />
@@ -661,7 +661,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
            {/* Left: Breadcrumbs */}
            <div className="flex items-center gap-1 text-sm text-slate-500 min-w-fit overflow-x-auto pb-1 md:pb-0 scrollbar-hide">
               {currentFolder && (
-                  <button 
+                  <button
                     onClick={() => {
                         if (currentFolder.parentId) {
                             const parent = folders.find(f => f.id === currentFolder.parentId);
@@ -670,21 +670,21 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                             setCurrentFolder(null);
                         }
                     }}
-                    className="mr-2 p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+                    className="mr-2 p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95"
                     title="Go Up"
                   >
                     <ArrowLeft size={16} />
                   </button>
               )}
-              
-              <button 
+
+              <button
                 onClick={() => { setCurrentFolder(null); setSearchQuery(''); }}
                 className={`flex items-center hover:text-red-900 transition-colors ${!currentFolder && !isSearching ? 'font-bold text-slate-800' : ''}`}
               >
                 {!currentFolder && !isSearching && <Home size={16} className="mr-1.5" />}
                 My Files
               </button>
-              
+
               {!isSearching && breadcrumbs.map((folder, index) => (
                 <React.Fragment key={folder.id}>
                   <ChevronRight size={14} className="text-slate-400 flex-shrink-0 mx-0.5" />
@@ -704,20 +704,20 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 </>
               )}
            </div>
-           
+
            {/* Middle: Search Bar */}
            <div className="relative flex-1 max-w-md w-full">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
-                <input 
-                  type="text" 
-                  placeholder="Search files..." 
+                <input
+                  type="text"
+                  placeholder="Search files..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-10 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:border-red-800 focus:ring-2 focus:ring-red-800/20 outline-none transition-all placeholder:text-slate-400"
+                  className="w-full pl-9 pr-10 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:border-red-800 focus:ring-2 focus:ring-red-800/20 outline-none transition-all placeholder:text-slate-400"
                 />
                 {searchQuery && (
-                  <button 
+                  <button
                     onClick={() => setSearchQuery('')}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                   >
@@ -726,37 +726,37 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 )}
               </div>
            </div>
-           
+
            {/* Right: Actions */}
            <div className="flex gap-3 min-w-fit">
               {!isSearching && (
-                <button 
+                <button
                     onClick={() => openModal('folder')}
-                    className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-xl text-sm font-semibold hover:bg-slate-50 flex items-center gap-2"
+                    className="px-4 py-2 bg-white border-2 border-slate-200 text-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-all duration-300 flex items-center gap-2 hover:-translate-y-1 hover:scale-105 active:scale-95"
                 >
                     <FolderPlus size={16} />
                     <span className="hidden sm:inline">New Folder</span>
                 </button>
               )}
-              
+
               {/* Limit Check */}
               {files.length >= 5 ? (
                  <div className="flex items-center gap-3">
                     <span className="hidden sm:inline text-xs md:text-sm font-semibold text-slate-500">Free limit reached.</span>
-                    <button 
+                    <button
                         onClick={() => setIsUpgradeModalOpen(true)}
-                        className="px-3 py-2 bg-red-900 text-white rounded-xl text-xs md:text-sm font-bold hover:bg-red-800 transition-colors shadow-lg shadow-red-200"
+                        className="px-3 py-2 bg-red-900 text-white rounded-lg text-xs md:text-sm font-bold hover:bg-red-800 transition-all duration-300 shadow-lg shadow-red-900/20 hover:-translate-y-1 hover:scale-105 active:scale-95"
                     >
                         Upgrade
                     </button>
                  </div>
               ) : (
-                <button 
+                <button
                     onClick={() => {
                         // Keep current folder context even if searching to allow upload
                         openModal('file');
                     }}
-                    className="px-4 py-2 bg-red-900 text-white rounded-xl text-sm font-semibold hover:bg-red-800 flex items-center gap-2 shadow-sm whitespace-nowrap"
+                    className="px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-red-900/20 whitespace-nowrap hover:-translate-y-1 hover:scale-105 active:scale-95"
                 >
                     <Upload size={16} />
                     <span className="hidden sm:inline">Add File</span>
@@ -767,8 +767,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Content (Drag & Drop Zone) */}
-        <div 
-          className={`bg-white border transition-all duration-300 rounded-2xl overflow-hidden min-h-[400px] relative ${
+        <div
+          className={`bg-white border transition-all duration-300 rounded-lg overflow-hidden min-h-[400px] relative ${
             isDragging ? 'border-red-900 bg-red-50/20 shadow-xl' : 'border-slate-200 shadow-sm'
           }`}
           onDragOver={handleDragOver}
@@ -778,7 +778,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
            {/* Drag & Drop Overlay */}
            {isDragging && (
               <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/60 backdrop-blur-sm pointer-events-none">
-                  <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-6 animate-bounce">
+                  <div className="w-24 h-24 bg-red-100 rounded-lg flex items-center justify-center mb-6 animate-bounce">
                       <Upload className="w-10 h-10 text-red-900" />
                   </div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">Drop to Upload</h3>
@@ -832,15 +832,15 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                  </p>
                  {!isSearching && (
                     <div className="flex gap-3 mt-4">
-                        <button 
+                        <button
                             onClick={() => openModal('folder')}
-                            className="px-4 py-2 text-slate-600 border border-slate-200 rounded-lg text-sm font-semibold hover:bg-slate-50"
+                            className="px-4 py-2 text-slate-600 border-2 border-slate-200 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95"
                         >
                             New Folder
                         </button>
-                        <button 
+                        <button
                             onClick={() => openModal('file')}
-                            className="px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800"
+                            className="px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20"
                         >
                             Upload File
                         </button>
@@ -887,9 +887,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                  <div className="col-span-3 text-xs text-slate-400">{formatDate(folder.createdAt)}</div>
                  <div className="col-span-2 text-xs text-slate-400">-</div>
                  <div className="col-span-2 flex justify-end">
-                    <button 
+                    <button
                       onClick={(e) => { e.stopPropagation(); openDeleteModal('folders', folder); }}
-                      className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                      className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-300 opacity-0 group-hover:opacity-100 hover:-translate-y-1 hover:scale-105 active:scale-95"
                     >
                        <Trash2 size={14} />
                     </button>
@@ -938,32 +938,32 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                  <div className="col-span-3 text-xs text-slate-500">{formatDate(file.createdAt)}</div>
                  <div className="col-span-2 text-xs text-slate-500">{formatFileSize(file.size)}</div>
                  <div className="col-span-2 flex justify-end gap-1">
-                    <button 
+                    <button
                        onClick={(e) => { e.stopPropagation(); setVersioningFile(file); }}
-                       className="p-1.5 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                       className="p-1.5 text-slate-400 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-all duration-300 opacity-0 group-hover:opacity-100 hover:-translate-y-1 hover:scale-105 active:scale-95"
                        title="Version History"
                     >
                        <History size={14} />
                     </button>
                     {isPreviewable && (
-                        <button 
+                        <button
                            onClick={(e) => { e.stopPropagation(); setPreviewFile(file); }}
-                           className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                           className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300 opacity-0 group-hover:opacity-100 hover:-translate-y-1 hover:scale-105 active:scale-95"
                            title="Preview"
                         >
                            <Eye size={14} />
                         </button>
                     )}
-                    <button 
+                    <button
                        onClick={(e) => { e.stopPropagation(); handleDownload(file.downloadURL); }}
-                       className="p-1.5 text-slate-400 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                       className="p-1.5 text-slate-400 hover:text-red-900 hover:bg-red-50 rounded-lg transition-all duration-300 opacity-0 group-hover:opacity-100 hover:-translate-y-1 hover:scale-105 active:scale-95"
                        title="Download"
                     >
                        <DownloadCloud size={14} />
                     </button>
-                    <button 
+                    <button
                        onClick={(e) => { e.stopPropagation(); openDeleteModal('files', file); }}
-                       className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                       className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-300 opacity-0 group-hover:opacity-100 hover:-translate-y-1 hover:scale-105 active:scale-95"
                        title="Delete"
                     >
                        <Trash2 size={14} />
@@ -978,47 +978,47 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10 pt-28 min-h-screen">
-      
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-10 pt-28 min-h-screen">
+
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16 sm:mb-20 md:mb-24">
          <div>
             <h1 className="text-3xl font-bold text-slate-900 mb-2">Dashboard</h1>
             <p className="text-slate-500">Manage your files and team members.</p>
          </div>
          <div className="flex items-center gap-3">
-             <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-full shadow-sm">
-                <div className="w-6 h-6 bg-red-100 text-red-900 rounded-full flex items-center justify-center font-bold text-xs">
+             <div className="flex items-center gap-2 px-3 py-1.5 bg-white border-2 border-slate-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-6 h-6 bg-red-100 text-red-900 rounded-lg flex items-center justify-center font-bold text-xs">
                     {getInitials(user?.displayName)}
                 </div>
                 <span className="text-sm font-medium text-slate-700">{user?.displayName || 'User'}</span>
              </div>
-             
+
              {/* Settings Dropdown Trigger */}
              <div className="relative" ref={dropdownRef}>
-                <button 
+                <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="p-2 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
+                  className="p-2 bg-white border-2 border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95"
                 >
                   <ChevronDown size={20} />
                 </button>
                 
                 {isDropdownOpen && (
-                   <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl z-50 animate-in fade-in zoom-in-95 duration-200 overflow-hidden">
-                      <button 
+                   <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-200 rounded-lg shadow-xl z-50 animate-in fade-in zoom-in-95 duration-200 overflow-hidden">
+                      <button
                         onClick={() => { setIsDropdownOpen(false); setIsSettingsOpen(true); }}
                         className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-red-900 font-medium transition-colors"
                       >
                          Settings
                       </button>
-                      <button 
+                      <button
                         onClick={() => { setIsDropdownOpen(false); setIsUpgradeModalOpen(true); }}
                         className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-red-900 font-medium transition-colors"
                       >
                          Upgrade Plan
                       </button>
                       <div className="border-t border-slate-100 my-1" />
-                      <button 
+                      <button
                         onClick={handleSignOut}
                         className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 font-medium transition-colors flex items-center gap-2"
                       >
@@ -1032,28 +1032,28 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl w-fit mb-8">
-         <button 
+      <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg w-fit mb-8 sm:mb-12">
+         <button
             onClick={() => setActiveTab('overview')}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === 'overview' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 ${activeTab === 'overview' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
          >
             Overview
          </button>
-         <button 
+         <button
             onClick={() => setActiveTab('files')}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === 'files' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 ${activeTab === 'files' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
          >
             My Files
          </button>
-         <button 
-            onClick={() => setActiveTab('notes')} // Assuming this tab exists based on types
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === 'notes' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+         <button
+            onClick={() => setActiveTab('notes')}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 ${activeTab === 'notes' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
          >
             Notes
          </button>
-         <button 
+         <button
             onClick={() => setActiveTab('team')}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === 'team' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 ${activeTab === 'team' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
          >
             Team
          </button>
@@ -1069,19 +1069,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
            {activeTab === 'overview' && renderOverview()}
            {activeTab === 'files' && renderFiles()}
            {activeTab === 'notes' && (
-              <div className="text-center py-20 bg-white border border-slate-200 rounded-2xl border-dashed">
+              <div className="text-center py-20 bg-white border border-slate-200 rounded-lg border-dashed">
                  <StickyNote className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                  <h3 className="text-slate-900 font-medium">Notes</h3>
                  <p className="text-slate-500 text-sm">Notes feature is coming soon.</p>
-                 <button onClick={() => openModal('note')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold">New Note</button>
+                 <button onClick={() => openModal('note')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20">New Note</button>
               </div>
            )}
            {activeTab === 'team' && (
-               <div className="text-center py-20 bg-white border border-slate-200 rounded-2xl border-dashed">
+               <div className="text-center py-20 bg-white border border-slate-200 rounded-lg border-dashed">
                  <Users className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                  <h3 className="text-slate-900 font-medium">Team Management</h3>
                  <p className="text-slate-500 text-sm">Team feature is coming soon.</p>
-                  <button onClick={() => openModal('member')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold">Add Member</button>
+                  <button onClick={() => openModal('member')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20">Add Member</button>
               </div>
            )}
          </>
@@ -1092,16 +1092,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {modalOpen.type && (
          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
              <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={closeModal} />
-             <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95">
-                <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+             <div className="relative w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden animate-in fade-in zoom-in-95">
+                <div className="px-6 sm:px-8 py-4 sm:py-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                    <h3 className="font-bold text-slate-900 capitalize">
                       {modalOpen.type === 'member' ? 'Add Team Member' : `Create New ${modalOpen.type}`}
                    </h3>
-                   <button onClick={closeModal} className="p-1 text-slate-400 hover:bg-slate-100 rounded-full">
+                   <button onClick={closeModal} className="p-1 text-slate-400 hover:bg-slate-100 rounded-lg hover:text-slate-600 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95">
                       <X size={18} />
                    </button>
                 </div>
-                <div className="p-6 space-y-4">
+                <div className="p-6 sm:p-8 space-y-4 sm:space-y-6">
                    {errorMsg && (
                       <div className="p-3 bg-red-50 text-red-600 text-xs rounded-lg">{errorMsg}</div>
                    )}
@@ -1120,7 +1120,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                             />
                             {selectedFile ? (
                                <div>
-                                  <div className="w-12 h-12 bg-red-100 text-red-900 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <div className="w-12 h-12 bg-red-100 text-red-900 rounded-lg flex items-center justify-center mx-auto mb-2">
                                      <FileIcon size={24} />
                                   </div>
                                   <p className="font-medium text-slate-900 text-sm truncate max-w-[200px] mx-auto">{selectedFile.name}</p>
@@ -1128,7 +1128,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                                </div>
                             ) : (
                                <div>
-                                  <div className="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <div className="w-12 h-12 bg-slate-100 text-slate-400 rounded-lg flex items-center justify-center mx-auto mb-2">
                                      <Upload size={24} />
                                   </div>
                                   <p className="font-medium text-slate-900 text-sm">Click to upload</p>
@@ -1207,17 +1207,17 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       </>
                    )}
 
-                   <div className="pt-2 flex gap-3">
-                      <button 
+                   <div className="pt-4 sm:pt-6 flex gap-3">
+                      <button
                         onClick={closeModal}
-                        className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50"
+                        className="flex-1 py-2.5 rounded-lg border-2 border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95"
                       >
                          Cancel
                       </button>
-                      <button 
+                      <button
                         onClick={handleCreate}
                         disabled={isSubmitting || (modalOpen.type === 'file' && !selectedFile)}
-                        className="flex-1 py-2.5 rounded-xl bg-red-900 text-white font-semibold text-sm hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="flex-1 py-2.5 rounded-lg bg-red-900 text-white font-semibold text-sm hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20"
                       >
                          {isSubmitting ? <Loader2 className="animate-spin w-4 h-4" /> : (modalOpen.type === 'file' ? 'Upload' : 'Create')}
                       </button>
@@ -1231,19 +1231,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {deleteModal.isOpen && (
          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
              <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={closeDeleteModal} />
-             <div className="relative w-full max-w-sm bg-white rounded-2xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95">
-                <div className="p-6 text-center">
-                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600">
+             <div className="relative w-full max-w-sm bg-white rounded-lg shadow-xl overflow-hidden animate-in fade-in zoom-in-95">
+                <div className="p-6 sm:p-8 text-center">
+                   <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4 text-red-600">
                       <Trash2 size={24} />
                    </div>
                    <h3 className="text-lg font-bold text-slate-900 mb-2">Delete {deleteModal.collectionName === 'folders' ? 'Folder' : 'Item'}?</h3>
                    <p className="text-sm text-slate-500 mb-6">
-                      Are you sure you want to delete <span className="font-bold text-slate-900">"{deleteModal.itemName}"</span>? 
+                      Are you sure you want to delete <span className="font-bold text-slate-900">"{deleteModal.itemName}"</span>?
                       {deleteModal.collectionName === 'folders' && <br/>}
                       {deleteModal.collectionName === 'folders' && "This will remove all items inside it."}
                       <br/>This action cannot be undone.
                    </p>
-                   
+
                    {deleteError && (
                       <div className="mb-4 p-3 bg-red-50 text-red-600 text-xs rounded-lg text-left flex items-center gap-2">
                          <AlertTriangle size={14} />
@@ -1252,17 +1252,17 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                    )}
 
                    <div className="flex gap-3">
-                      <button 
+                      <button
                         onClick={closeDeleteModal}
                         disabled={isDeleting}
-                        className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50"
+                        className="flex-1 py-2.5 rounded-lg border-2 border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95"
                       >
                          Cancel
                       </button>
-                      <button 
+                      <button
                         onClick={handleConfirmDelete}
                         disabled={isDeleting}
-                        className="flex-1 py-2.5 rounded-xl bg-red-600 text-white font-semibold text-sm hover:bg-red-500 flex items-center justify-center gap-2"
+                        className="flex-1 py-2.5 rounded-lg bg-red-600 text-white font-semibold text-sm hover:bg-red-500 flex items-center justify-center gap-2 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-600/20"
                       >
                          {isDeleting ? <Loader2 className="animate-spin w-4 h-4" /> : 'Delete'}
                       </button>

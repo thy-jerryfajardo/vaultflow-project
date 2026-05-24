@@ -46,26 +46,26 @@ const Pricing: React.FC<PageProps> = ({ onNavigate, onOpenAuth }) => {
   ];
 
   return (
-    <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in slide-in-from-bottom-4 duration-700">
-      
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+    <section className="py-16 sm:py-20 md:py-24 lg:py-28 px-4 sm:px-6 max-w-7xl mx-auto min-h-screen animate-in fade-in slide-in-from-bottom-4 duration-700">
+
+      <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20 md:mb-24 lg:mb-28">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6">
           Simple, transparent pricing.
         </h1>
-        <p className="text-lg text-slate-600">
+        <p className="text-base sm:text-lg md:text-xl text-slate-600">
           Choose the plan that fits your security needs. No hidden fees.
         </p>
       </div>
-      
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-16 sm:mb-20 md:mb-24 lg:mb-28">
         {plans.map((plan, index) => (
-          <div 
-            key={index} 
-            className={`flex flex-col p-6 rounded-2xl border ${
-              plan.highlight 
-                ? 'bg-red-50/50 border-red-200 shadow-xl shadow-red-100 relative' 
-                : 'bg-white border-slate-200 shadow-sm hover:shadow-md'
-            } transition-all duration-300`}
+          <div
+            key={index}
+            className={`flex flex-col p-4 sm:p-6 md:p-8 rounded-lg border ${
+              plan.highlight
+                ? 'bg-red-50/50 border-red-200 shadow-lg shadow-red-100/50 relative hover:shadow-xl transition-all duration-300'
+                : 'bg-white border-slate-200 shadow-md hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300'
+            }`}
           >
             {plan.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -74,27 +74,27 @@ const Pricing: React.FC<PageProps> = ({ onNavigate, onOpenAuth }) => {
             )}
             <h3 className="text-lg font-bold text-slate-900 mb-2">{plan.name}</h3>
             <p className="text-sm text-slate-500 mb-6 h-10">{plan.description}</p>
-            
+
             <div className="mb-6">
-              <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
+              <span className="text-3xl sm:text-4xl font-bold text-slate-900">{plan.price}</span>
               {plan.period && <span className="text-slate-500 font-medium">{plan.period}</span>}
             </div>
 
-            <div className="flex-1 space-y-3 mb-8">
+            <div className="flex-1 space-y-3 sm:space-y-4 mb-8">
               {plan.features.map((feature, i) => (
-                <div key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                  <Check className={`w-4 h-4 mt-0.5 ${plan.highlight ? 'text-red-900' : 'text-slate-400'}`} />
+                <div key={i} className="flex items-start gap-2 sm:gap-3 text-sm text-slate-700">
+                  <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.highlight ? 'text-red-900' : 'text-slate-400'}`} />
                   <span>{feature}</span>
                 </div>
               ))}
             </div>
 
-            <button 
+            <button
               onClick={onOpenAuth}
-              className={`w-full py-2.5 rounded-xl font-bold text-sm transition-all ${
-                plan.highlight 
-                  ? 'bg-red-900 text-white hover:bg-red-500 shadow-lg shadow-red-200' 
-                  : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+              className={`w-full py-2.5 sm:py-3 rounded-lg font-bold text-sm transition-all ${
+                plan.highlight
+                  ? 'px-6 sm:px-8 bg-red-900 text-white hover:bg-red-800 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20'
+                  : 'px-6 sm:px-8 bg-white border-2 border-red-200 text-slate-700 hover:border-red-300 hover:bg-red-50 shadow-lg shadow-red-900/20'
               }`}
             >
               {plan.cta}
@@ -103,18 +103,18 @@ const Pricing: React.FC<PageProps> = ({ onNavigate, onOpenAuth }) => {
         ))}
       </div>
 
-      <div className="text-center bg-slate-50 rounded-2xl p-8 max-w-3xl mx-auto border border-slate-200">
-        <h3 className="font-bold text-slate-900 mb-2">Need a custom contract?</h3>
+      <div className="text-center bg-slate-50 rounded-lg p-4 sm:p-6 md:p-8 max-w-3xl mx-auto border border-slate-200">
+        <h3 className="font-bold text-slate-900 mb-2 text-lg sm:text-xl">Need a custom contract?</h3>
         <p className="text-slate-600 text-sm mb-4">
             We offer custom Data Processing Agreements (DPA) and invoicing for enterprise teams.
         </p>
         <button onClick={() => onNavigate('/support')} className="text-red-900 font-bold text-sm hover:underline">
-            Contact Support Team &rarr;
+            Contact Support Team →
         </button>
       </div>
 
-      <div className="mt-12 text-center">
-        <button 
+      <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 text-center">
+        <button
             onClick={() => onNavigate('/')}
             className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-red-900 transition-colors mx-auto"
         >

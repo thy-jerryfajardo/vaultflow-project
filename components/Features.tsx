@@ -11,7 +11,7 @@ interface FeatureCardProps {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, delay }) => {
   return (
-    <div className={`group p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${delay}`}>
+    <div className={`group p-5 sm:p-6 md:p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${delay}`}>
       <div className="w-12 h-12 mb-6 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-red-900 group-hover:bg-red-900 group-hover:text-white transition-all duration-300">
         {icon}
       </div>
@@ -65,7 +65,7 @@ const Features: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 sm:mb-20 md:mb-24">
           {features.map((feature, idx) => (
             <FeatureCard 
               key={idx}

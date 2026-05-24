@@ -17,7 +17,7 @@ const PricingPreview: React.FC<PricingPreviewProps> = ({ onNavigate }) => {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {/* Free */}
-          <div className="p-8 bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+          <div className="p-6 sm:p-7 md:p-8 bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
             <div className="mb-4">
                <h3 className="text-lg font-bold text-slate-900">Starter</h3>
                <div className="text-3xl font-bold text-slate-900 mt-2">$0 <span className="text-sm font-medium text-slate-500">/mo</span></div>
@@ -28,11 +28,11 @@ const PricingPreview: React.FC<PricingPreviewProps> = ({ onNavigate }) => {
                <div className="flex items-center gap-2 text-sm text-slate-600"><Check size={16} className="text-red-900"/> Basic Encryption</div>
                <div className="flex items-center gap-2 text-sm text-slate-600"><Check size={16} className="text-red-900"/> Community Support</div>
             </div>
-            <button onClick={() => onNavigate('/pricing')} className="w-full py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-50 transition-colors">Compare Plans</button>
+            <button onClick={() => onNavigate('/pricing')} className="w-full py-3 px-6 sm:px-8 rounded-lg border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-50 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 shadow-sm">Compare Plans</button>
           </div>
 
           {/* Pro */}
-          <div className="p-8 bg-slate-900 rounded-3xl border border-slate-800 shadow-xl relative overflow-hidden group flex flex-col transform md:-translate-y-4">
+          <div className="p-6 sm:p-7 md:p-8 bg-slate-900 rounded-3xl border border-slate-800 shadow-xl relative overflow-hidden group flex flex-col transform md:-translate-y-4">
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <div className="w-32 h-32 bg-red-900 rounded-full blur-3xl" />
             </div>
@@ -50,11 +50,11 @@ const PricingPreview: React.FC<PricingPreviewProps> = ({ onNavigate }) => {
                <div className="flex items-center gap-2 text-sm text-slate-300"><Check size={16} className="text-red-800"/> Priority Support</div>
                <div className="flex items-center gap-2 text-sm text-slate-300"><Check size={16} className="text-red-800"/> 30-day Version History</div>
             </div>
-            <button onClick={() => onNavigate('/pricing')} className="w-full py-2.5 rounded-xl bg-red-900 text-white font-bold text-sm hover:bg-red-800 transition-colors relative z-10 shadow-lg shadow-red-900/20">Get Started</button>
+            <button onClick={() => onNavigate('/pricing')} className="w-full py-3 px-6 sm:px-8 rounded-lg bg-red-900 text-white font-bold text-sm hover:bg-red-800 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 relative z-10 shadow-lg shadow-red-900/20">Get Started</button>
           </div>
 
           {/* Business */}
-           <div className="p-8 bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+           <div className="p-6 sm:p-7 md:p-8 bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col">
             <div className="mb-4">
                <h3 className="text-lg font-bold text-slate-900">Business</h3>
                <div className="text-3xl font-bold text-slate-900 mt-2">$99 <span className="text-sm font-medium text-slate-500">/mo</span></div>
@@ -65,7 +65,7 @@ const PricingPreview: React.FC<PricingPreviewProps> = ({ onNavigate }) => {
                <div className="flex items-center gap-2 text-sm text-slate-600"><Check size={16} className="text-red-900"/> SSO & Audit Logs</div>
                <div className="flex items-center gap-2 text-sm text-slate-600"><Check size={16} className="text-red-900"/> 24/7 Dedicated Support</div>
             </div>
-            <button onClick={() => onNavigate('/pricing')} className="w-full py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-50 transition-colors">Contact Sales</button>
+            <button onClick={() => onNavigate('/pricing')} className="w-full py-3 px-6 sm:px-8 rounded-lg border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-50 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 shadow-sm">Contact Sales</button>
           </div>
         </div>
       </div>

@@ -226,9 +226,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
       <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         
         {/* Close Button */}
-        <button 
+        <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all z-10"
+          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all z-10"
         >
           <X size={20} />
         </button>
@@ -250,7 +250,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   setActiveTab('signin');
                   setPassword(''); // Clear password for security
                 }}
-                className="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 px-6 sm:px-8 rounded-lg bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 shadow-lg shadow-slate-900/20 flex items-center justify-center gap-2"
               >
                 Log In
               </button>
@@ -271,7 +271,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   setActiveTab('signin');
                   setPassword('');
                 }}
-                className="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 px-6 sm:px-8 rounded-lg bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 shadow-lg shadow-slate-900/20 flex items-center justify-center gap-2"
               >
                 Sign In
               </button>
@@ -311,10 +311,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
 
-                <button 
+                <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-200 transition-all flex items-center justify-center gap-2 mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-3 px-6 sm:px-8 rounded-lg bg-blue-600 text-white font-bold text-sm hover:bg-blue-500 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 mt-4 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20"
                 >
                   {isLoading ? (
                     <>
@@ -475,7 +475,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 rounded-xl bg-red-900 text-white font-bold text-sm hover:bg-red-800 hover:shadow-lg hover:shadow-red-200 transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-3 px-6 sm:px-8 rounded-lg bg-red-900 text-white font-bold text-sm hover:bg-red-800 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-red-900/20"
                 >
                   {isLoading ? (
                     <>
@@ -502,10 +502,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="mt-6 flex justify-center">
-                  <button 
+                  <button
                     onClick={handleGoogleSignIn}
                     disabled={isLoading}
-                    className="w-full flex items-center justify-center px-4 py-2 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors text-slate-600 text-sm font-medium gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center px-6 sm:px-8 py-3 border border-slate-200 rounded-lg hover:bg-slate-50 hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95 text-slate-600 text-sm font-medium gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                   >
                      <svg className="w-4 h-4" viewBox="0 0 24 24">
                         <path

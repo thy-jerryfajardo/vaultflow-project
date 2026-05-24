@@ -207,7 +207,7 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
       <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 flex flex-col max-h-[80vh]">
         
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+        <div className="px-6 sm:px-8 py-4 sm:py-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
            <div>
              <h3 className="font-bold text-slate-900 flex items-center gap-2">
                <Clock size={18} className="text-red-900" />
@@ -215,23 +215,23 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
              </h3>
              <p className="text-xs text-slate-500 mt-1 max-w-[250px] truncate">{file.name}</p>
            </div>
-           <button 
+           <button
              onClick={onClose}
-             className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all"
+             className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all hover:-translate-y-1 hover:scale-105 active:scale-95"
            >
              <X size={18} />
            </button>
         </div>
 
         {/* Actions Area */}
-        <div className="p-6 border-b border-slate-100 bg-white">
+        <div className="p-6 sm:p-8 border-b border-slate-100 bg-white">
             {error && (
                 <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-100 text-red-600 text-xs font-medium flex items-center gap-2">
                     <AlertTriangle size={14} />
                     {error}
                 </div>
             )}
-            
+
             {successMsg && (
                 <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-100 text-red-900 text-xs font-medium flex items-center gap-2">
                     <CheckCircle2 size={14} />
@@ -240,16 +240,16 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
             )}
 
             <div className="flex items-center gap-4">
-                <button 
+                <button
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isUploading}
-                    className="flex-1 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="flex-1 py-2.5 bg-red-900 text-white rounded-lg text-sm font-bold hover:bg-red-800 transition-all duration-300 shadow-lg shadow-red-900/20 flex items-center justify-center gap-2 disabled:opacity-50 hover:-translate-y-1 hover:scale-105 active:scale-95"
                 >
                     {isUploading ? <Loader2 className="animate-spin w-4 h-4" /> : <Upload size={16} />}
                     Upload New Version
                 </button>
-                <input 
-                    type="file" 
+                <input
+                    type="file"
                     ref={fileInputRef}
                     className="hidden"
                     onChange={handleUploadNewVersion}
@@ -266,21 +266,21 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
         </div>
 
         {/* Versions List */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50/50">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4 bg-slate-50/50">
             {isLoading ? (
                 <div className="flex justify-center py-8">
                     <Loader2 className="w-6 h-6 text-slate-300 animate-spin" />
                 </div>
             ) : versions.length === 0 ? (
                 <div className="text-center py-12">
-                    <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-300">
+                    <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mx-auto mb-3 text-slate-300">
                         <Clock size={20} />
                     </div>
                     <p className="text-sm text-slate-500">No previous versions found.</p>
                 </div>
             ) : (
                 versions.map((version) => (
-                    <div key={version.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between group hover:border-red-200 transition-colors">
+                    <div key={version.id} className="bg-white p-4 sm:p-6 rounded-lg border border-slate-200 shadow-sm flex items-center justify-between group hover:border-red-200 transition-colors">
                         <div className="flex items-center gap-3 overflow-hidden">
                             <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-500 flex-shrink-0">
                                 <FileText size={18} />
@@ -294,10 +294,10 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
                                 </div>
                             </div>
                         </div>
-                        <button 
+                        <button
                             onClick={() => handleRestore(version)}
                             disabled={isUploading}
-                            className="p-2 text-slate-400 hover:text-red-900 hover:bg-red-50 rounded-lg transition-all flex flex-col items-center gap-1 disabled:opacity-30"
+                            className="p-2 text-slate-400 hover:text-red-900 hover:bg-red-50 rounded-lg transition-all duration-300 flex flex-col items-center gap-1 disabled:opacity-30 hover:-translate-y-1 hover:scale-105 active:scale-95"
                             title="Restore this version"
                         >
                             <RotateCcw size={16} />
