@@ -71,8 +71,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
       setIsLoading(false);
       return;
     }
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters.');
+    if (password.length < 12) {
+      setError('Password must be at least 12 characters.');
       setIsLoading(false);
       return;
     }
@@ -451,7 +451,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-red-900 transition-colors" />
                   </div>
                   {activeTab === 'signup' && (
-                    <p className="text-xs text-slate-500 mt-1">Must contain an uppercase letter, number, or special character.</p>
+                    <p className="text-xs text-slate-500 mt-1">At least 12 characters with an uppercase letter, number, or special character.</p>
                   )}
                 </div>
 
