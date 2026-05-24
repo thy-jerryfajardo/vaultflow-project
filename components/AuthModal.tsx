@@ -26,6 +26,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   // Form State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
 
   // UI State
@@ -39,6 +40,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
       setIsLoading(false);
       setEmail('');
       setPassword('');
+      setConfirmPassword('');
       setFullName('');
       setMode('default');
       setActiveTab('signin');
@@ -50,13 +52,21 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
     setError(null);
   }, [activeTab, mode]);
 
+  // Validate password strength (requires special char, number, or uppercase)
+  const isPasswordStrong = (pwd: string): boolean => {
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pwd);
+    const hasNumber = /[0-9]/.test(pwd);
+    const hasUppercase = /[A-Z]/.test(pwd);
+    return hasSpecialChar || hasNumber || hasUppercase;
+  };
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
 
     // Basic Validation
-    if (!email || !password) {
+    if (!email || !password || !confirmPassword) {
       setError('Please fill in all required fields.');
       setIsLoading(false);
       return;
@@ -66,11 +76,21 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
       setIsLoading(false);
       return;
     }
+    if (!isPasswordStrong(password)) {
+      setError('Password must contain at least one uppercase letter, number, or special character.');
+      setIsLoading(false);
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      setIsLoading(false);
+      return;
+    }
 
     try {
       // Create user
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
+
       // Update profile with full name if provided
       if (fullName) {
         await updateProfile(userCredential.user, {
@@ -85,7 +105,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
       await signOut(auth);
 
       setMode('verification-pending');
-      
+
     } catch (err: any) {
       console.error(err);
       setError(getFirebaseErrorMessage(err.code));
@@ -430,7 +450,27 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     />
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-red-900 transition-colors" />
                   </div>
+                  {activeTab === 'signup' && (
+                    <p className="text-xs text-slate-500 mt-1">Must contain an uppercase letter, number, or special character.</p>
+                  )}
                 </div>
+
+                {activeTab === 'signup' && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-700 ml-1">Confirm Password</label>
+                    <div className="relative group">
+                      <input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-red-900 focus:ring-4 focus:ring-red-900/10 outline-none transition-all duration-300 pl-10 bg-slate-50 group-hover:bg-white placeholder:text-slate-400 focus:placeholder:text-slate-300/70"
+                        placeholder="••••••••"
+                        required
+                      />
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-red-900 transition-colors" />
+                    </div>
+                  </div>
+                )}
 
                 <button
                   type="submit"
