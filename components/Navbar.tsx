@@ -48,50 +48,50 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
           : 'bg-white/40 backdrop-blur-lg border-white/40 ring-white/10 shadow-none py-4'
       }`}
     >
-      <div className="px-8 flex items-center justify-between">
+      <div className="px-4 sm:px-6 md:px-8 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#/"
           onClick={(e) => handleNavClick(e, '/')}
-          className="flex items-center gap-2.5 group cursor-pointer"
+          className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer"
         >
           <div className="relative flex items-center justify-center">
-            <Shield className="w-7 h-7 text-red-900 fill-red-900/10 group-hover:fill-red-900/20 transition-all duration-300 transform group-hover:scale-105" />
+            <Shield className="w-6 sm:w-7 h-6 sm:h-7 text-red-900 fill-red-900/15 group-hover:fill-red-900/40 group-hover:scale-125 transition-all duration-300" />
           </div>
-          <span className="text-[18px] font-extrabold tracking-tight text-slate-950 transition-colors duration-300">
+          <span className="text-base sm:text-lg md:text-[18px] font-extrabold tracking-tight text-slate-950 transition-all duration-300 group-hover:text-red-900 group-hover:scale-105">
             SunnSafe
           </span>
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8 lg:gap-10">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={`#${link.path}`}
               onClick={(e) => handleNavClick(e, link.path)}
-              className="relative text-[14px] font-bold text-slate-600 hover:text-slate-900 transition-colors duration-300 group tracking-tight"
+              className="relative text-sm lg:text-[14px] font-bold text-slate-600 hover:text-slate-900 transition-all duration-300 group tracking-tight hover:scale-110"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-red-900 transition-all duration-300 group-hover:w-full rounded-full" />
+              <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-red-900 transition-all duration-400 group-hover:w-full rounded-full" />
             </a>
           ))}
         </div>
 
         {/* CTA Button */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-2 lg:gap-3">
           {user ? (
             <>
-              <button 
+              <button
                 onClick={() => onNavigate('/dashboard')}
-                className="relative overflow-hidden rounded-xl bg-slate-900 px-5 py-2.5 text-[13px] font-bold text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98] flex items-center gap-2"
+                className="rounded-lg bg-red-900 px-5 py-2.5 text-xs lg:text-[13px] font-bold text-white transition-all duration-300 hover:bg-red-800 hover:shadow-lg hover:-translate-y-0.5 hover:scale-110 active:scale-95 flex items-center gap-2 group"
               >
-                <LayoutDashboard size={14} />
-                Dashboard
+                <LayoutDashboard size={14} className="group-hover:scale-125 transition-transform" />
+                <span className="hidden lg:inline">Dashboard</span>
               </button>
               <button
                 onClick={handleSignOut}
-                className="p-2.5 text-slate-500 hover:text-red-600 transition-colors rounded-xl hover:bg-red-50"
+                className="p-2.5 text-slate-500 hover:text-red-900 hover:bg-red-50 transition-all duration-300 rounded-lg hover:scale-110 active:scale-95"
                 title="Sign Out"
               >
                 <LogOut size={18} />
@@ -100,9 +100,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
           ) : (
             <button
               onClick={onOpenAuth}
-              className="relative overflow-hidden rounded-xl bg-red-900 px-6 py-2.5 text-[13px] font-bold text-white transition-all duration-300 hover:bg-red-800 hover:shadow-[0_4px_12px_rgba(127,29,29,0.3)] hover:-translate-y-0.5 active:scale-[0.98]"
+              className="rounded-lg bg-red-900 px-6 py-2.5 text-xs lg:text-[13px] font-bold text-white transition-all duration-300 hover:bg-red-800 hover:shadow-lg hover:shadow-red-900/40 hover:-translate-y-0.5 hover:scale-110 active:scale-95 group"
             >
-              Get Started
+              <span className="group-hover:inline-block">Get Started</span>
             </button>
           )}
         </div>
@@ -111,44 +111,44 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
         <div className="md:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-slate-500 hover:text-slate-900 transition-colors"
+            className="p-2 text-slate-500 hover:text-red-900 hover:bg-red-50 transition-all rounded-lg hover:scale-110 active:scale-95"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={24} className="animate-spin-slow" /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-[calc(100%+1rem)] left-0 right-0 bg-white/95 backdrop-blur-3xl border border-white/60 p-6 md:hidden flex flex-col gap-4 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] rounded-3xl animate-in fade-in zoom-in-95 duration-300">
+        <div className="absolute top-[calc(100%+0.5rem)] left-4 right-4 bg-white/97 backdrop-blur-2xl border-2 border-white/80 p-4 sm:p-6 md:hidden flex flex-col gap-4 shadow-2xl rounded-2xl animate-in fade-in slide-in-from-top-4 zoom-in-95 duration-300">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={`#${link.path}`}
-              className="text-slate-600 hover:text-red-900 font-bold py-3 text-base transition-colors border-b border-slate-50 last:border-0 text-center"
+              className="text-slate-600 hover:text-red-900 hover:bg-red-50 font-bold py-3 px-3 text-base transition-all border-b border-slate-100 last:border-0 text-center rounded-lg hover:scale-105 active:scale-95"
               onClick={(e) => handleNavClick(e, link.path)}
             >
               {link.name}
             </a>
           ))}
-          
+
           {user ? (
             <>
-              <button 
+              <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   onNavigate('/dashboard');
                 }}
-                className="w-full mt-2 rounded-xl bg-slate-900 px-6 py-4 text-sm font-bold text-white hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+                className="w-full mt-2 rounded-lg bg-red-900 px-6 py-3.5 text-sm font-bold text-white hover:bg-red-800 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 transition-all active:scale-95 flex items-center justify-center gap-2 group"
               >
-                <LayoutDashboard size={16} />
+                <LayoutDashboard size={16} className="group-hover:scale-125 transition-transform" />
                 Dashboard
               </button>
-              <button 
+              <button
                 onClick={handleSignOut}
-                className="w-full rounded-xl border border-slate-200 px-6 py-4 text-sm font-bold text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors flex items-center justify-center gap-2"
+                className="w-full rounded-lg border-2 border-red-200 px-6 py-3.5 text-sm font-bold text-red-900 hover:text-red-800 hover:bg-red-50 hover:border-red-300 hover:-translate-y-0.5 hover:scale-105 transition-all active:scale-95 flex items-center justify-center gap-2 group"
               >
-                <LogOut size={16} />
+                <LogOut size={16} className="group-hover:scale-125 transition-transform" />
                 Sign Out
               </button>
             </>
@@ -158,7 +158,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
                 setIsMobileMenuOpen(false);
                 onOpenAuth();
               }}
-              className="w-full mt-2 rounded-xl bg-red-900 px-6 py-4 text-sm font-bold text-white hover:bg-red-800 transition-colors shadow-lg shadow-red-200"
+              className="w-full mt-2 rounded-lg bg-red-900 px-6 py-3.5 text-sm font-bold text-white hover:bg-red-800 hover:shadow-lg hover:shadow-red-900/40 hover:-translate-y-0.5 hover:scale-105 transition-all active:scale-95 shadow-md"
             >
               Get Started Free
             </button>
