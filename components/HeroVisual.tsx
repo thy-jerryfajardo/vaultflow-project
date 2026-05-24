@@ -6,15 +6,15 @@ const HeroVisual: React.FC = () => {
   return (
     <div className="relative w-full mt-8 md:mt-16 bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden group">
         {/* Abstract Background Blurs inside the card */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-900/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl -ml-32 -mb-32 pointer-events-none" />
 
         <div className="grid md:grid-cols-12 gap-0 min-h-[500px]">
             {/* Left Panel: Feature Showcase */}
             <div className="md:col-span-5 p-8 md:p-12 flex flex-col justify-center border-b md:border-b-0 md:border-r border-slate-100 bg-white/80 backdrop-blur-sm relative z-10 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 w-fit mb-6">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-widest">Live Preview</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-100 w-fit mb-6">
+                    <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-[10px] font-bold text-red-800 uppercase tracking-widest">Live Preview</span>
                 </div>
                 
                 <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
@@ -31,7 +31,7 @@ const HeroVisual: React.FC = () => {
                         { icon: Activity, title: "Real-time Audit Logs", desc: "Track every view, download, and file edit." }
                     ].map((item, i) => (
                         <div key={i} className="flex gap-4 group/item">
-                            <div className="mt-1 w-10 h-10 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-500 group-hover/item:text-emerald-600 group-hover/item:border-emerald-200 transition-all shadow-sm">
+                            <div className="mt-1 w-10 h-10 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-slate-500 group-hover/item:text-red-900 group-hover/item:border-red-200 transition-all shadow-sm">
                                 <item.icon size={18} />
                             </div>
                             <div>
@@ -65,7 +65,7 @@ const HeroVisual: React.FC = () => {
                         <div className="w-40 border-r border-slate-100 p-4 hidden sm:block bg-slate-50/30">
                             <div className="w-24 h-5 bg-slate-200 rounded mb-6 opacity-70" />
                             <div className="space-y-1">
-                                <div className="w-full h-8 bg-emerald-50 text-emerald-700 rounded-lg flex items-center px-3 text-xs font-bold border border-emerald-100/50">
+                                <div className="w-full h-8 bg-red-50 text-red-900 rounded-lg flex items-center px-3 text-xs font-bold border border-red-100/50">
                                    <FileText size={12} className="mr-2" /> Files
                                 </div>
                                 <div className="w-full h-8 text-slate-400 flex items-center px-3 text-xs hover:bg-slate-100 rounded-lg transition-colors">
@@ -86,7 +86,7 @@ const HeroVisual: React.FC = () => {
                                    <div className="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400">
                                       <Search size={14} />
                                    </div>
-                                   <div className="w-24 h-8 bg-emerald-600 rounded-lg shadow-sm shadow-emerald-200 flex items-center justify-center text-xs font-bold text-white">
+                                   <div className="w-24 h-8 bg-red-900 rounded-lg shadow-sm shadow-red-200 flex items-center justify-center text-xs font-bold text-white">
                                       Upload
                                    </div>
                                 </div>

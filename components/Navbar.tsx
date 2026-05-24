@@ -50,16 +50,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
     >
       <div className="px-8 flex items-center justify-between">
         {/* Logo */}
-        <a 
-          href="#/" 
+        <a
+          href="#/"
           onClick={(e) => handleNavClick(e, '/')}
           className="flex items-center gap-2.5 group cursor-pointer"
         >
           <div className="relative flex items-center justify-center">
-            <Shield className="w-7 h-7 text-emerald-600 fill-emerald-600/10 group-hover:fill-emerald-600/20 transition-all duration-300 transform group-hover:scale-105" />
+            <Shield className="w-7 h-7 text-red-900 fill-red-900/10 group-hover:fill-red-900/20 transition-all duration-300 transform group-hover:scale-105" />
           </div>
           <span className="text-[18px] font-extrabold tracking-tight text-slate-950 transition-colors duration-300">
-            VaultFlow
+            SunnSafe
           </span>
         </a>
 
@@ -73,7 +73,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
               className="relative text-[14px] font-bold text-slate-600 hover:text-slate-900 transition-colors duration-300 group tracking-tight"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-emerald-500 transition-all duration-300 group-hover:w-full rounded-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-red-900 transition-all duration-300 group-hover:w-full rounded-full" />
             </a>
           ))}
         </div>
@@ -98,9 +98,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
               </button>
             </>
           ) : (
-            <button 
+            <button
               onClick={onOpenAuth}
-              className="relative overflow-hidden rounded-xl bg-emerald-600 px-6 py-2.5 text-[13px] font-bold text-white transition-all duration-300 hover:bg-emerald-500 hover:shadow-[0_4px_12px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 active:scale-[0.98]"
+              className="relative overflow-hidden rounded-xl bg-red-900 px-6 py-2.5 text-[13px] font-bold text-white transition-all duration-300 hover:bg-red-800 hover:shadow-[0_4px_12px_rgba(127,29,29,0.3)] hover:-translate-y-0.5 active:scale-[0.98]"
             >
               Get Started
             </button>
@@ -125,7 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
             <a
               key={link.name}
               href={`#${link.path}`}
-              className="text-slate-600 hover:text-emerald-600 font-bold py-3 text-base transition-colors border-b border-slate-50 last:border-0 text-center"
+              className="text-slate-600 hover:text-red-900 font-bold py-3 text-base transition-colors border-b border-slate-50 last:border-0 text-center"
               onClick={(e) => handleNavClick(e, link.path)}
             >
               {link.name}
@@ -153,12 +153,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAuth }) => {
               </button>
             </>
           ) : (
-            <button 
+            <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 onOpenAuth();
               }}
-              className="w-full mt-2 rounded-xl bg-emerald-600 px-6 py-4 text-sm font-bold text-white hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-200"
+              className="w-full mt-2 rounded-xl bg-red-900 px-6 py-4 text-sm font-bold text-white hover:bg-red-800 transition-colors shadow-lg shadow-red-200"
             >
               Get Started Free
             </button>

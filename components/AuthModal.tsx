@@ -215,8 +215,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
 
         {mode === 'verification-pending' ? (
            <div className="p-8 text-center animate-in fade-in zoom-in-95">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Mail className="w-8 h-8 text-emerald-600" />
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="w-8 h-8 text-red-900" />
               </div>
               <h2 className="text-2xl font-bold text-slate-900 mb-2">Verify your email</h2>
               <p className="text-slate-600 mb-8 leading-relaxed">
@@ -322,16 +322,16 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           <>
             {/* Header Section */}
             <div className="px-8 pt-8 pb-6 text-center">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-4 text-emerald-600">
+              <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mx-auto mb-4 text-red-900">
                 <Lock size={24} />
               </div>
               <h2 className="text-2xl font-bold text-slate-900">
                 {activeTab === 'signin' ? 'Welcome Back' : 'Create Account'}
               </h2>
               <p className="text-slate-500 mt-2 text-sm">
-                {activeTab === 'signin' 
-                  ? 'Enter your credentials to access your vault.' 
-                  : 'Start your secure journey with VaultFlow today.'}
+                {activeTab === 'signin'
+                  ? 'Enter your credentials to access your vault.'
+                  : 'Start your secure journey with SunnSafe today.'}
               </p>
             </div>
 
@@ -340,23 +340,23 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
               <button
                 onClick={() => setActiveTab('signin')}
                 className={`flex-1 pb-3 text-sm font-semibold transition-all relative ${
-                  activeTab === 'signin' ? 'text-emerald-600' : 'text-slate-500 hover:text-slate-700'
+                  activeTab === 'signin' ? 'text-red-900' : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 Sign In
                 {activeTab === 'signin' && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-t-full" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-900 rounded-t-full" />
                 )}
               </button>
               <button
                 onClick={() => setActiveTab('signup')}
                 className={`flex-1 pb-3 text-sm font-semibold transition-all relative ${
-                  activeTab === 'signup' ? 'text-emerald-600' : 'text-slate-500 hover:text-slate-700'
+                  activeTab === 'signup' ? 'text-red-900' : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 Sign Up
                 {activeTab === 'signup' && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-t-full" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-900 rounded-t-full" />
                 )}
               </button>
             </div>
@@ -377,15 +377,15 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                    <div className="space-y-1.5">
                    <label className="text-xs font-semibold text-slate-700 ml-1">Full Name</label>
                    <div className="relative group">
-                     <input 
-                       type="text" 
+                     <input
+                       type="text"
                        value={fullName}
                        onChange={(e) => setFullName(e.target.value)}
-                       className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300 pl-10 bg-slate-50 group-hover:bg-white placeholder:text-slate-400 focus:placeholder:text-slate-300/70"
+                       className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-red-900 focus:ring-4 focus:ring-red-900/10 outline-none transition-all duration-300 pl-10 bg-slate-50 group-hover:bg-white placeholder:text-slate-400 focus:placeholder:text-slate-300/70"
                        placeholder="John Doe"
                      />
-                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors">
-                        <div className="w-5 h-5 bg-slate-200 rounded-full" /> 
+                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-900 transition-colors">
+                        <div className="w-5 h-5 bg-slate-200 rounded-full" />
                      </div>
                    </div>
                  </div>
@@ -394,15 +394,15 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-slate-700 ml-1">Email Address</label>
                   <div className="relative group">
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300 pl-10 bg-slate-50 group-hover:bg-white placeholder:text-slate-400 focus:placeholder:text-slate-300/70"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-red-900 focus:ring-4 focus:ring-red-900/10 outline-none transition-all duration-300 pl-10 bg-slate-50 group-hover:bg-white placeholder:text-slate-400 focus:placeholder:text-slate-300/70"
                       placeholder="name@company.com"
                       required
                     />
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-red-900 transition-colors" />
                   </div>
                 </div>
 
@@ -410,32 +410,32 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                   <div className="flex justify-between items-center ml-1">
                     <label className="text-xs font-semibold text-slate-700">Password</label>
                     {activeTab === 'signin' && (
-                      <button 
+                      <button
                         type="button"
                         onClick={() => setMode('forgot-password')}
-                        className="text-xs font-medium text-emerald-600 hover:text-emerald-700 hover:underline transition-all"
+                        className="text-xs font-medium text-red-900 hover:text-red-800 hover:underline transition-all"
                       >
                         Forgot password?
                       </button>
                     )}
                   </div>
                   <div className="relative group">
-                    <input 
-                      type="password" 
+                    <input
+                      type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all duration-300 pl-10 bg-slate-50 group-hover:bg-white placeholder:text-slate-400 focus:placeholder:text-slate-300/70"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-red-900 focus:ring-4 focus:ring-red-900/10 outline-none transition-all duration-300 pl-10 bg-slate-50 group-hover:bg-white placeholder:text-slate-400 focus:placeholder:text-slate-300/70"
                       placeholder="••••••••"
                       required
                     />
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-red-900 transition-colors" />
                   </div>
                 </div>
 
-                <button 
+                <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-200 transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-3 rounded-xl bg-red-900 text-white font-bold text-sm hover:bg-red-800 hover:shadow-lg hover:shadow-red-200 transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <>
@@ -496,7 +496,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         {mode !== 'reset-sent' && mode !== 'forgot-password' && mode !== 'verification-pending' && (
             <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 text-center">
                 <p className="text-xs text-slate-500">
-                    By continuing, you agree to VaultFlow's <a href="#" className="text-emerald-600 hover:underline">Terms of Service</a> and <a href="#" className="text-emerald-600 hover:underline">Privacy Policy</a>.
+                    By continuing, you agree to SunnSafe's <a href="#" className="text-red-900 hover:underline">Terms of Service</a> and <a href="#" className="text-red-900 hover:underline">Privacy Policy</a>.
                 </p>
             </div>
         )}

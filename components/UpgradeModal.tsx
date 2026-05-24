@@ -24,12 +24,12 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
            <h3 className="font-bold text-slate-900 flex items-center gap-2">
-             <div className="p-1.5 bg-emerald-100 rounded-lg">
-                <Sparkles className="w-4 h-4 text-emerald-600" />
+             <div className="p-1.5 bg-red-100 rounded-lg">
+                <Sparkles className="w-4 h-4 text-red-900" />
              </div>
              Upgrade your plan
            </h3>
-           <button 
+           <button
              onClick={onClose}
              className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all"
            >
@@ -45,25 +45,25 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose }) => {
 
            <div className="space-y-3 mb-8">
               <div className="flex items-center gap-2 text-sm text-slate-600">
-                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                 <CheckCircle2 className="w-4 h-4 text-red-900" />
                  <span>Unlimited file storage</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-600">
-                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                 <CheckCircle2 className="w-4 h-4 text-red-900" />
                  <span>Priority support</span>
               </div>
            </div>
-           
+
            <div className="flex gap-3">
-             <button 
+             <button
                onClick={onClose}
                className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-sm hover:bg-slate-50 transition-colors"
              >
                Close
              </button>
-             <button 
+             <button
                onClick={onClose}
-               className="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-200"
+               className="flex-1 py-2.5 rounded-xl bg-red-900 text-white font-bold text-sm hover:bg-red-800 transition-colors shadow-lg shadow-red-200"
              >
                Learn More
              </button>

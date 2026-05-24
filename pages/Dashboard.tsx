@@ -468,7 +468,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         return; 
       } 
       else if (modalOpen.type === 'note') {
-        const colors = ['bg-yellow-50', 'bg-purple-50', 'bg-blue-50', 'bg-red-50', 'bg-emerald-50'];
+        const colors = ['bg-yellow-50', 'bg-purple-50', 'bg-blue-50', 'bg-red-50', 'bg-red-50'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         
         await addDoc(collection(db, `${basePath}/notes`), {
@@ -483,7 +483,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         await addDoc(collection(db, `${basePath}/teamMembers`), {
           name: newItemName,
           role: newItemRole,
-          email: newItemName.toLowerCase().replace(/\s/g, '') + '@vaultflow.team', // Simulated email
+          email: newItemName.toLowerCase().replace(/\s/g, '') + '@sunnsafe.team', // Simulated email
           createdAt: serverTimestamp()
         });
         closeModal();
@@ -528,13 +528,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Security Card */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-          <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center mb-4">
+          <div className="w-10 h-10 bg-red-50 text-red-900 rounded-lg flex items-center justify-center mb-4">
             <Shield size={20} />
           </div>
           <h3 className="text-lg font-bold text-slate-900 mb-1">Vault Status</h3>
           <p className="text-sm text-slate-500 mb-4">Your environment is secure and encrypted.</p>
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded w-fit">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-red-900 bg-red-50 px-2 py-1 rounded w-fit">
+            <div className="w-1.5 h-1.5 rounded-full bg-red-800" />
             Active Protection
           </div>
         </div>
@@ -566,15 +566,15 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       </div>
 
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -mr-16 -mt-16" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-red-800/10 rounded-full blur-3xl -mr-16 -mt-16" />
         <div className="relative z-10">
-           <h3 className="text-xl font-bold mb-2">Welcome to VaultFlow 2.0</h3>
+           <h3 className="text-xl font-bold mb-2">Welcome to SunnSafe 2.0</h3>
            <p className="text-slate-400 max-w-lg mb-6">
              You now have full access to the new file management system, secure notes, and team collaboration tools.
            </p>
            <button 
              onClick={() => setActiveTab('files')}
-             className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold transition-colors flex items-center gap-2"
+             className="px-5 py-2.5 bg-red-900 hover:bg-red-800 text-white rounded-xl font-semibold transition-colors flex items-center gap-2"
            >
              Start Uploading
              <Upload size={16} />
@@ -679,7 +679,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               
               <button 
                 onClick={() => { setCurrentFolder(null); setSearchQuery(''); }}
-                className={`flex items-center hover:text-emerald-600 transition-colors ${!currentFolder && !isSearching ? 'font-bold text-slate-800' : ''}`}
+                className={`flex items-center hover:text-red-900 transition-colors ${!currentFolder && !isSearching ? 'font-bold text-slate-800' : ''}`}
               >
                 {!currentFolder && !isSearching && <Home size={16} className="mr-1.5" />}
                 My Files
@@ -690,7 +690,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   <ChevronRight size={14} className="text-slate-400 flex-shrink-0 mx-0.5" />
                   <button
                     onClick={() => { setCurrentFolder(folder); setSearchQuery(''); }}
-                     className={`hover:text-emerald-600 transition-colors whitespace-nowrap ${index === breadcrumbs.length - 1 ? 'font-bold text-slate-800' : ''}`}
+                     className={`hover:text-red-900 transition-colors whitespace-nowrap ${index === breadcrumbs.length - 1 ? 'font-bold text-slate-800' : ''}`}
                   >
                     {folder.name}
                   </button>
@@ -714,7 +714,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   placeholder="Search files..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-10 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all placeholder:text-slate-400"
+                  className="w-full pl-9 pr-10 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:border-red-800 focus:ring-2 focus:ring-red-800/20 outline-none transition-all placeholder:text-slate-400"
                 />
                 {searchQuery && (
                   <button 
@@ -745,7 +745,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     <span className="hidden sm:inline text-xs md:text-sm font-semibold text-slate-500">Free limit reached.</span>
                     <button 
                         onClick={() => setIsUpgradeModalOpen(true)}
-                        className="px-3 py-2 bg-emerald-600 text-white rounded-xl text-xs md:text-sm font-bold hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-200"
+                        className="px-3 py-2 bg-red-900 text-white rounded-xl text-xs md:text-sm font-bold hover:bg-red-800 transition-colors shadow-lg shadow-red-200"
                     >
                         Upgrade
                     </button>
@@ -756,7 +756,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         // Keep current folder context even if searching to allow upload
                         openModal('file');
                     }}
-                    className="px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-semibold hover:bg-emerald-500 flex items-center gap-2 shadow-sm whitespace-nowrap"
+                    className="px-4 py-2 bg-red-900 text-white rounded-xl text-sm font-semibold hover:bg-red-800 flex items-center gap-2 shadow-sm whitespace-nowrap"
                 >
                     <Upload size={16} />
                     <span className="hidden sm:inline">Add File</span>
@@ -769,7 +769,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         {/* Content (Drag & Drop Zone) */}
         <div 
           className={`bg-white border transition-all duration-300 rounded-2xl overflow-hidden min-h-[400px] relative ${
-            isDragging ? 'border-emerald-500 bg-emerald-50/20 shadow-xl' : 'border-slate-200 shadow-sm'
+            isDragging ? 'border-red-900 bg-red-50/20 shadow-xl' : 'border-slate-200 shadow-sm'
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -778,8 +778,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
            {/* Drag & Drop Overlay */}
            {isDragging && (
               <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/60 backdrop-blur-sm pointer-events-none">
-                  <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mb-6 animate-bounce">
-                      <Upload className="w-10 h-10 text-emerald-600" />
+                  <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-6 animate-bounce">
+                      <Upload className="w-10 h-10 text-red-900" />
                   </div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">Drop to Upload</h3>
                   <p className="text-slate-600 font-medium">Release your files here instantly.</p>
@@ -789,19 +789,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
            {/* Header Row */}
            <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-slate-100 bg-slate-50/50 text-xs font-semibold text-slate-500 uppercase tracking-wider select-none">
               <div 
-                className="col-span-5 flex items-center cursor-pointer hover:text-emerald-600 transition-colors" 
+                className="col-span-5 flex items-center cursor-pointer hover:text-red-900 transition-colors" 
                 onClick={() => handleSort('name')}
               >
                 Name <SortIcon column="name" />
               </div>
               <div 
-                className="col-span-3 flex items-center cursor-pointer hover:text-emerald-600 transition-colors" 
+                className="col-span-3 flex items-center cursor-pointer hover:text-red-900 transition-colors" 
                 onClick={() => handleSort('createdAt')}
               >
                 Date Modified <SortIcon column="createdAt" />
               </div>
               <div 
-                className="col-span-2 flex items-center cursor-pointer hover:text-emerald-600 transition-colors" 
+                className="col-span-2 flex items-center cursor-pointer hover:text-red-900 transition-colors" 
                 onClick={() => handleSort('size')}
               >
                 Size <SortIcon column="size" />
@@ -840,7 +840,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         </button>
                         <button 
                             onClick={() => openModal('file')}
-                            className="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-500"
+                            className="px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800"
                         >
                             Upload File
                         </button>
@@ -872,7 +872,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         onClick={(e) => e.stopPropagation()}
                         onBlur={() => saveRename('folders')}
                         autoFocus
-                        className="bg-white border border-emerald-500 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
+                        className="bg-white border border-red-900 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
                       />
                     ) : (
                       <span 
@@ -910,7 +910,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                       file.type === 'image' ? 'bg-purple-50 text-purple-600' :
                       file.type === 'pdf' ? 'bg-red-50 text-red-600' : 
-                      'bg-emerald-50 text-emerald-600'
+                      'bg-red-50 text-red-900'
                     }`}>
                        {file.type === 'image' ? <ImageIcon size={16} /> : <FileText size={16} />}
                     </div>
@@ -923,7 +923,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         onClick={(e) => e.stopPropagation()}
                         onBlur={() => saveRename('files')}
                         autoFocus
-                        className="bg-white border border-emerald-500 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
+                        className="bg-white border border-red-900 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
                       />
                     ) : (
                       <span 
@@ -956,7 +956,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     )}
                     <button 
                        onClick={(e) => { e.stopPropagation(); handleDownload(file.downloadURL); }}
-                       className="p-1.5 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                       className="p-1.5 text-slate-400 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
                        title="Download"
                     >
                        <DownloadCloud size={14} />
@@ -988,7 +988,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
          </div>
          <div className="flex items-center gap-3">
              <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-full shadow-sm">
-                <div className="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center font-bold text-xs">
+                <div className="w-6 h-6 bg-red-100 text-red-900 rounded-full flex items-center justify-center font-bold text-xs">
                     {getInitials(user?.displayName)}
                 </div>
                 <span className="text-sm font-medium text-slate-700">{user?.displayName || 'User'}</span>
@@ -1007,13 +1007,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                    <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl z-50 animate-in fade-in zoom-in-95 duration-200 overflow-hidden">
                       <button 
                         onClick={() => { setIsDropdownOpen(false); setIsSettingsOpen(true); }}
-                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-emerald-600 font-medium transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-red-900 font-medium transition-colors"
                       >
                          Settings
                       </button>
                       <button 
                         onClick={() => { setIsDropdownOpen(false); setIsUpgradeModalOpen(true); }}
-                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-emerald-600 font-medium transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-red-900 font-medium transition-colors"
                       >
                          Upgrade Plan
                       </button>
@@ -1062,7 +1062,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       {/* Main Content Area */}
       {loadingData ? (
          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
+            <Loader2 className="w-8 h-8 text-red-900 animate-spin" />
          </div>
       ) : (
          <>
@@ -1073,7 +1073,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                  <StickyNote className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                  <h3 className="text-slate-900 font-medium">Notes</h3>
                  <p className="text-slate-500 text-sm">Notes feature is coming soon.</p>
-                 <button onClick={() => openModal('note')} className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold">New Note</button>
+                 <button onClick={() => openModal('note')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold">New Note</button>
               </div>
            )}
            {activeTab === 'team' && (
@@ -1081,7 +1081,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                  <Users className="w-12 h-12 text-slate-300 mx-auto mb-3" />
                  <h3 className="text-slate-900 font-medium">Team Management</h3>
                  <p className="text-slate-500 text-sm">Team feature is coming soon.</p>
-                  <button onClick={() => openModal('member')} className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold">Add Member</button>
+                  <button onClick={() => openModal('member')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold">Add Member</button>
               </div>
            )}
          </>
@@ -1110,7 +1110,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       <div className="space-y-4">
                          <div 
                            onClick={() => fileInputRef.current?.click()}
-                           className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 hover:border-emerald-500 transition-colors"
+                           className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 hover:border-red-900 transition-colors"
                          >
                             <input 
                                type="file" 
@@ -1120,7 +1120,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                             />
                             {selectedFile ? (
                                <div>
-                                  <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <div className="w-12 h-12 bg-red-100 text-red-900 rounded-full flex items-center justify-center mx-auto mb-2">
                                      <FileIcon size={24} />
                                   </div>
                                   <p className="font-medium text-slate-900 text-sm truncate max-w-[200px] mx-auto">{selectedFile.name}</p>
@@ -1144,7 +1144,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                                  type="text" 
                                  value={newItemName}
                                  onChange={(e) => setNewItemName(e.target.value)}
-                                 className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 outline-none"
+                                 className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-800 focus:ring-2 focus:ring-red-800/10 outline-none"
                                />
                             </div>
                          )}
@@ -1157,7 +1157,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                                </div>
                                <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
                                   <div 
-                                    className="bg-emerald-500 h-full rounded-full transition-all duration-300"
+                                    className="bg-red-800 h-full rounded-full transition-all duration-300"
                                     style={{ width: `${uploadProgress}%` }}
                                   />
                                </div>
@@ -1175,7 +1175,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                              value={newItemName}
                              onChange={(e) => setNewItemName(e.target.value)}
                              placeholder={modalOpen.type === 'folder' ? 'New Folder' : ''}
-                             className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 outline-none"
+                             className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-800 focus:ring-2 focus:ring-red-800/10 outline-none"
                              autoFocus
                            />
                         </div>
@@ -1185,7 +1185,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                               <textarea 
                                 value={newItemContent}
                                 onChange={(e) => setNewItemContent(e.target.value)}
-                                className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 outline-none h-32 resize-none"
+                                className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-800 focus:ring-2 focus:ring-red-800/10 outline-none h-32 resize-none"
                                 placeholder="Write your note here..."
                               />
                            </div>
@@ -1196,7 +1196,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                               <select
                                 value={newItemRole}
                                 onChange={(e) => setNewItemRole(e.target.value)}
-                                className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 outline-none bg-white"
+                                className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-800 focus:ring-2 focus:ring-red-800/10 outline-none bg-white"
                               >
                                  <option value="Viewer">Viewer</option>
                                  <option value="Editor">Editor</option>
@@ -1217,7 +1217,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       <button 
                         onClick={handleCreate}
                         disabled={isSubmitting || (modalOpen.type === 'file' && !selectedFile)}
-                        className="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="flex-1 py-2.5 rounded-xl bg-red-900 text-white font-semibold text-sm hover:bg-red-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                       >
                          {isSubmitting ? <Loader2 className="animate-spin w-4 h-4" /> : (modalOpen.type === 'file' ? 'Upload' : 'Create')}
                       </button>

@@ -119,7 +119,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
             )}
             
             {successMessage && (
-                <div className="mb-4 p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs font-medium flex items-center gap-2">
+                <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-100 text-red-900 text-xs font-medium flex items-center gap-2">
                     <CheckCircle2 size={14} />
                     {successMessage}
                 </div>
@@ -132,7 +132,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
                         type="text" 
                         value={displayName}
                         onChange={(e) => setDisplayName(e.target.value)}
-                        className="w-full px-4 py-2 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm"
+                        className="w-full px-4 py-2 rounded-xl border border-slate-200 focus:border-red-900 focus:ring-4 focus:ring-red-900/10 outline-none transition-all text-sm"
                         placeholder="John Doe"
                     />
                 </div>
@@ -144,7 +144,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
                             type="text" 
                             value={photoURL}
                             onChange={(e) => setPhotoURL(e.target.value)}
-                            className="w-full px-4 py-2 pl-10 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm"
+                            className="w-full px-4 py-2 pl-10 rounded-xl border border-slate-200 focus:border-red-900 focus:ring-4 focus:ring-red-900/10 outline-none transition-all text-sm"
                             placeholder="https://example.com/avatar.jpg"
                         />
                         <Image className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />

@@ -65,7 +65,7 @@ const App: React.FC = () => {
       case '/dashboard':
         if (loading) return (
           <div className="min-h-screen flex items-center justify-center pt-20">
-            <Loader2 className="w-8 h-8 text-emerald-600 animate-spin" />
+            <Loader2 className="w-8 h-8 text-red-900 animate-spin" />
           </div>
         );
         if (!user) return null;
@@ -96,28 +96,28 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="relative min-h-screen overflow-x-hidden selection:bg-red-100 selection:text-red-900">
       <BackgroundEffects />
-      
+
       <div className="relative z-10">
         <Navbar onNavigate={navigate} onOpenAuth={openAuthModal} />
         <main>
           {renderContent()}
         </main>
       </div>
-      
+
       {/* Decorative footer gradient */}
       <div className="fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none z-0" />
-      
+
       {/* Simple Footer (Hide on dashboard/demo to reduce clutter) */}
       {currentPath !== '/dashboard' && currentPath !== '/demo' && (
         <footer className="relative z-10 py-12 px-6 border-t border-slate-200 bg-white">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-emerald-600 flex items-center justify-center">
+              <div className="w-6 h-6 rounded-lg bg-red-900 flex items-center justify-center">
                 <div className="w-2 h-2 bg-white rounded-full" />
               </div>
-              <span className="font-bold text-slate-900">VaultFlow</span>
+              <span className="font-bold text-slate-900">SunnSafe</span>
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-6">
@@ -125,9 +125,9 @@ const App: React.FC = () => {
                 The secure choice for modern businesses. <br className="md:hidden" /> Trusted by teams globally.
               </p>
               {!user && (
-                <button 
+                <button
                   onClick={openAuthModal}
-                  className="px-6 py-2.5 rounded-full bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-500 transition-all shadow-[0_4px_12px_rgba(16,185,129,0.2)] hover:shadow-[0_4px_20px_rgba(16,185,129,0.3)] flex items-center gap-2 group whitespace-nowrap"
+                  className="px-6 py-2.5 rounded-full bg-red-900 text-white text-sm font-semibold hover:bg-red-800 transition-all shadow-[0_4px_12px_rgba(127,29,29,0.2)] hover:shadow-[0_4px_20px_rgba(127,29,29,0.3)] flex items-center gap-2 group whitespace-nowrap"
                 >
                   Get Started
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -136,9 +136,9 @@ const App: React.FC = () => {
             </div>
 
             <div className="flex gap-8 text-sm font-medium text-slate-600">
-              <a href="#" onClick={(e) => { e.preventDefault(); }} className="hover:text-emerald-600 transition-colors">Privacy</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); }} className="hover:text-emerald-600 transition-colors">Terms</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); navigate('/pricing'); }} className="hover:text-emerald-600 transition-colors">Pricing</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); }} className="hover:text-red-900 transition-colors">Privacy</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); }} className="hover:text-red-900 transition-colors">Terms</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); navigate('/pricing'); }} className="hover:text-red-900 transition-colors">Pricing</a>
             </div>
           </div>
         </footer>

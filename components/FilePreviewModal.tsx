@@ -80,7 +80,7 @@ const FilePreviewModal: React.FC<FilePreviewModalProps> = ({ file, onClose }) =>
         <div className="flex-1 bg-slate-900/50 rounded-2xl overflow-hidden relative border border-white/10 shadow-2xl backdrop-blur-sm pointer-events-auto flex items-center justify-center">
             
             {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center text-emerald-500 z-0">
+              <div className="absolute inset-0 flex items-center justify-center text-red-800 z-0">
                 <Loader2 className="w-10 h-10 animate-spin" />
               </div>
             )}
@@ -108,7 +108,7 @@ const FilePreviewModal: React.FC<FilePreviewModalProps> = ({ file, onClose }) =>
                  <p className="mb-4">Preview not available for this file type.</p>
                  <button 
                    onClick={handleDownload}
-                   className="px-6 py-2 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors"
+                   className="px-6 py-2 bg-red-900 text-white rounded-lg font-semibold hover:bg-red-800 transition-colors"
                  >
                    Download File
                  </button>

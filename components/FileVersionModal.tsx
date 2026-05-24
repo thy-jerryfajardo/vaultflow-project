@@ -210,7 +210,7 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
            <div>
              <h3 className="font-bold text-slate-900 flex items-center gap-2">
-               <Clock size={18} className="text-emerald-600" />
+               <Clock size={18} className="text-red-900" />
                Version History
              </h3>
              <p className="text-xs text-slate-500 mt-1 max-w-[250px] truncate">{file.name}</p>
@@ -233,7 +233,7 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
             )}
             
             {successMsg && (
-                <div className="mb-4 p-3 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs font-medium flex items-center gap-2">
+                <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-100 text-red-900 text-xs font-medium flex items-center gap-2">
                     <CheckCircle2 size={14} />
                     {successMsg}
                 </div>
@@ -257,8 +257,8 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
             </div>
             {isUploading && uploadProgress > 0 && (
                  <div className="mt-3 w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                    <div 
-                      className="bg-emerald-500 h-full rounded-full transition-all duration-300"
+                    <div
+                      className="bg-red-800 h-full rounded-full transition-all duration-300"
                       style={{ width: `${uploadProgress}%` }}
                     />
                  </div>
@@ -280,7 +280,7 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
                 </div>
             ) : (
                 versions.map((version) => (
-                    <div key={version.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between group hover:border-emerald-200 transition-colors">
+                    <div key={version.id} className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between group hover:border-red-200 transition-colors">
                         <div className="flex items-center gap-3 overflow-hidden">
                             <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-500 flex-shrink-0">
                                 <FileText size={18} />
@@ -297,7 +297,7 @@ const FileVersionModal: React.FC<FileVersionModalProps> = ({ file, userId, onClo
                         <button 
                             onClick={() => handleRestore(version)}
                             disabled={isUploading}
-                            className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all flex flex-col items-center gap-1 disabled:opacity-30"
+                            className="p-2 text-slate-400 hover:text-red-900 hover:bg-red-50 rounded-lg transition-all flex flex-col items-center gap-1 disabled:opacity-30"
                             title="Restore this version"
                         >
                             <RotateCcw size={16} />

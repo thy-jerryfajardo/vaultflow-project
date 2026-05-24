@@ -64,20 +64,20 @@ const INITIAL_FOLDERS: FolderItem[] = [
 const INITIAL_FILES: FileItem[] = [
   { id: '1', name: 'Project_Alpha_Specs.pdf', size: 2400000, type: 'pdf', mimeType: 'application/pdf', folderId: null, createdAt: { seconds: 1715200000 }, downloadURL: '#' },
   { id: '2', name: 'Budget_2024.xlsx', size: 1500000, type: 'doc', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', folderId: 'f2', createdAt: { seconds: 1714600000 }, downloadURL: '#' },
-  { id: '3', name: 'VaultFlow_Logo_V2.png', size: 4500000, type: 'image', mimeType: 'image/png', folderId: 'f4', createdAt: { seconds: 1715100000 }, downloadURL: 'https://images.unsplash.com/photo-1614064641938-3e8529437109?auto=format&fit=crop&q=80&w=2000' },
+  { id: '3', name: 'SunnSafe_Logo_V2.png', size: 4500000, type: 'image', mimeType: 'image/png', folderId: 'f4', createdAt: { seconds: 1715100000 }, downloadURL: 'https://images.unsplash.com/photo-1614064641938-3e8529437109?auto=format&fit=crop&q=80&w=2000' },
   { id: '4', name: 'NDA_Template.docx', size: 850000, type: 'doc', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', folderId: 'f3', createdAt: { seconds: 1714100000 }, downloadURL: '#' },
   { id: '5', name: 'Meeting_Notes_May.txt', size: 12000, type: 'doc', mimeType: 'text/plain', folderId: null, createdAt: { seconds: 1715300000 }, downloadURL: '#' },
 ];
 
 const INITIAL_MEMBERS: MemberItem[] = [
-  { id: 'm1', name: 'Sarah Jenkins', role: 'Admin', email: 'sarah@vaultflow.team', createdAt: { seconds: 1710000000 } },
-  { id: 'm2', name: 'Mike Ross', role: 'Editor', email: 'mike@vaultflow.team', createdAt: { seconds: 1711000000 } },
-  { id: 'm3', name: 'Jessica Pearson', role: 'Viewer', email: 'jessica@vaultflow.team', createdAt: { seconds: 1712000000 } },
+  { id: 'm1', name: 'Sarah Jenkins', role: 'Admin', email: 'sarah@sunnsafe.team', createdAt: { seconds: 1710000000 } },
+  { id: 'm2', name: 'Mike Ross', role: 'Editor', email: 'mike@sunnsafe.team', createdAt: { seconds: 1711000000 } },
+  { id: 'm3', name: 'Jessica Pearson', role: 'Viewer', email: 'jessica@sunnsafe.team', createdAt: { seconds: 1712000000 } },
 ];
 
 const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
   // Mock User
-  const user = { displayName: 'Demo User', email: 'demo@vaultflow.team', uid: 'demo-123' };
+  const user = { displayName: 'Demo User', email: 'demo@sunnsafe.team', uid: 'demo-123' };
   
   // Data State (In-Memory Persistence)
   const [folders, setFolders] = useState<FolderItem[]>(INITIAL_FOLDERS);
@@ -261,7 +261,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
         };
         setFiles([newFile, ...files]);
     } else if (modalOpen.type === 'note') {
-        const colors = ['bg-yellow-50', 'bg-purple-50', 'bg-blue-50', 'bg-red-50', 'bg-emerald-50'];
+        const colors = ['bg-yellow-50', 'bg-purple-50', 'bg-blue-50', 'bg-red-50', 'bg-red-50'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         const newNote: NoteItem = {
             id,
@@ -276,7 +276,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
             id,
             name: newItemName,
             role: newItemRole,
-            email: newItemName.toLowerCase().replace(/\s/g, '') + '@vaultflow.team',
+            email: newItemName.toLowerCase().replace(/\s/g, '') + '@sunnsafe.team',
             createdAt: timestamp
         };
         setMembers([newMember, ...members]);
@@ -354,13 +354,13 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-          <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center mb-4">
+          <div className="w-10 h-10 bg-red-50 text-red-900 rounded-lg flex items-center justify-center mb-4">
             <Shield size={20} />
           </div>
           <h3 className="text-lg font-bold text-slate-900 mb-1">Vault Status</h3>
           <p className="text-sm text-slate-500 mb-4">Your environment is secure and encrypted.</p>
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded w-fit">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-red-900 bg-red-50 px-2 py-1 rounded w-fit">
+            <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
             Active Protection
           </div>
         </div>
@@ -390,20 +390,20 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
       </div>
 
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -mr-16 -mt-16" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/10 rounded-full blur-3xl -mr-16 -mt-16" />
         <div className="relative z-10">
            <div className="flex items-center gap-2 mb-2">
-             <Sparkles size={16} className="text-emerald-400" />
-             <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">Interactive Demo</span>
+             <Sparkles size={16} className="text-red-400" />
+             <span className="text-red-400 text-xs font-bold uppercase tracking-wider">Interactive Demo</span>
            </div>
-           <h3 className="text-xl font-bold mb-2">Welcome to VaultFlow 2.0</h3>
+           <h3 className="text-xl font-bold mb-2">Welcome to SunnSafe 2.0</h3>
            <p className="text-slate-400 max-w-lg mb-6">
              Feel free to add files, create folders, and manage team members. 
              <br /><strong>Note:</strong> Data is stored in your browser's memory and will reset on refresh.
            </p>
            <button 
              onClick={() => setActiveTab('files')}
-             className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold transition-colors flex items-center gap-2"
+             className="px-5 py-2.5 bg-red-900 hover:bg-red-500 text-white rounded-xl font-semibold transition-colors flex items-center gap-2"
            >
              Start Exploring
              <ChevronRight size={16} />
@@ -455,14 +455,14 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                     <ArrowLeft size={16} />
                   </button>
               )}
-              <button onClick={() => { setCurrentFolder(null); setSearchQuery(''); }} className={`flex items-center hover:text-emerald-600 transition-colors ${!currentFolder && !isSearching ? 'font-bold text-slate-800' : ''}`}>
+              <button onClick={() => { setCurrentFolder(null); setSearchQuery(''); }} className={`flex items-center hover:text-red-900 transition-colors ${!currentFolder && !isSearching ? 'font-bold text-slate-800' : ''}`}>
                 {!currentFolder && !isSearching && <Home size={16} className="mr-1.5" />}
                 My Files
               </button>
               {!isSearching && breadcrumbs.map((folder, index) => (
                 <React.Fragment key={folder.id}>
                   <ChevronRight size={14} className="text-slate-400 flex-shrink-0 mx-0.5" />
-                  <button onClick={() => { setCurrentFolder(folder); setSearchQuery(''); }} className={`hover:text-emerald-600 transition-colors whitespace-nowrap ${index === breadcrumbs.length - 1 ? 'font-bold text-slate-800' : ''}`}>
+                  <button onClick={() => { setCurrentFolder(folder); setSearchQuery(''); }} className={`hover:text-red-900 transition-colors whitespace-nowrap ${index === breadcrumbs.length - 1 ? 'font-bold text-slate-800' : ''}`}>
                     {folder.name}
                   </button>
                 </React.Fragment>
@@ -472,7 +472,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
            <div className="relative flex-1 max-w-md w-full">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
-                <input type="text" placeholder="Search files..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-9 pr-10 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all placeholder:text-slate-400" />
+                <input type="text" placeholder="Search files..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-9 pr-10 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:border-red-500 focus:ring-2 focus:ring-red-500/20 outline-none transition-all placeholder:text-slate-400" />
                 {searchQuery && <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"><X size={14} /></button>}
               </div>
            </div>
@@ -481,7 +481,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
               <button onClick={() => openModal('folder')} className="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-xl text-sm font-semibold hover:bg-slate-50 flex items-center gap-2">
                   <FolderPlus size={16} /> <span className="hidden sm:inline">New Folder</span>
               </button>
-              <button onClick={() => openModal('file')} className="px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-semibold hover:bg-emerald-500 flex items-center gap-2 shadow-sm whitespace-nowrap">
+              <button onClick={() => openModal('file')} className="px-4 py-2 bg-red-900 text-white rounded-xl text-sm font-semibold hover:bg-red-500 flex items-center gap-2 shadow-sm whitespace-nowrap">
                   <Upload size={16} /> <span className="hidden sm:inline">Add File</span>
               </button>
            </div>
@@ -489,21 +489,21 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
 
         {/* Content Zone */}
         <div 
-          className={`bg-white border transition-all duration-300 rounded-2xl overflow-hidden min-h-[400px] relative ${isDragging ? 'border-emerald-500 bg-emerald-50/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}
+          className={`bg-white border transition-all duration-300 rounded-2xl overflow-hidden min-h-[400px] relative ${isDragging ? 'border-red-500 bg-red-50/20 shadow-xl' : 'border-slate-200 shadow-sm'}`}
           onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
         >
            {isDragging && (
               <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/60 backdrop-blur-sm pointer-events-none">
-                  <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mb-6 animate-bounce"><Upload className="w-10 h-10 text-emerald-600" /></div>
+                  <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-6 animate-bounce"><Upload className="w-10 h-10 text-red-900" /></div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">Drop to Upload</h3>
                   <p className="text-slate-600 font-medium">Add to demo environment.</p>
               </div>
            )}
 
            <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-slate-100 bg-slate-50/50 text-xs font-semibold text-slate-500 uppercase tracking-wider select-none">
-              <div className="col-span-5 flex items-center cursor-pointer hover:text-emerald-600" onClick={() => handleSort('name')}>Name <SortIcon column="name" /></div>
-              <div className="col-span-3 flex items-center cursor-pointer hover:text-emerald-600" onClick={() => handleSort('createdAt')}>Date Modified <SortIcon column="createdAt" /></div>
-              <div className="col-span-2 flex items-center cursor-pointer hover:text-emerald-600" onClick={() => handleSort('size')}>Size <SortIcon column="size" /></div>
+              <div className="col-span-5 flex items-center cursor-pointer hover:text-red-900" onClick={() => handleSort('name')}>Name <SortIcon column="name" /></div>
+              <div className="col-span-3 flex items-center cursor-pointer hover:text-red-900" onClick={() => handleSort('createdAt')}>Date Modified <SortIcon column="createdAt" /></div>
+              <div className="col-span-2 flex items-center cursor-pointer hover:text-red-900" onClick={() => handleSort('size')}>Size <SortIcon column="size" /></div>
               <div className="col-span-2 text-right">Action</div>
            </div>
 
@@ -520,7 +520,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                         onClick={(e) => e.stopPropagation()}
                         onBlur={() => saveRename('folders')}
                         autoFocus
-                        className="bg-white border border-emerald-500 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
+                        className="bg-white border border-red-500 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
                       />
                     ) : (
                       <span 
@@ -543,7 +543,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
            {sortedFiles.map(file => (
               <div key={file.id} onClick={() => handleFileClick(file)} className="grid grid-cols-12 gap-4 px-6 py-4 border-b border-slate-50 hover:bg-slate-50 transition-colors group items-center cursor-pointer">
                  <div className="col-span-5 flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${file.type === 'image' ? 'bg-purple-50 text-purple-600' : file.type === 'pdf' ? 'bg-red-50 text-red-600' : 'bg-emerald-50 text-emerald-600'}`}>
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${file.type === 'image' ? 'bg-purple-50 text-purple-600' : file.type === 'pdf' ? 'bg-red-50 text-red-600' : 'bg-red-50 text-red-900'}`}>
                        {file.type === 'image' ? <ImageIcon size={16} /> : <FileText size={16} />}
                     </div>
                     {editingId === file.id ? (
@@ -555,7 +555,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                         onClick={(e) => e.stopPropagation()}
                         onBlur={() => saveRename('files')}
                         autoFocus
-                        className="bg-white border border-emerald-500 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
+                        className="bg-white border border-red-500 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
                       />
                     ) : (
                       <span 
@@ -571,7 +571,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                  <div className="col-span-2 text-xs text-slate-500">{formatFileSize(file.size)}</div>
                  <div className="col-span-2 flex justify-end gap-1">
                     <button onClick={(e) => { e.stopPropagation(); handleFileClick(file); }} className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"><Eye size={14} /></button>
-                    <button onClick={(e) => { e.stopPropagation(); window.open(file.downloadURL, '_blank'); }} className="p-1.5 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"><DownloadCloud size={14} /></button>
+                    <button onClick={(e) => { e.stopPropagation(); window.open(file.downloadURL, '_blank'); }} className="p-1.5 text-slate-400 hover:text-red-900 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"><DownloadCloud size={14} /></button>
                     <button onClick={(e) => { e.stopPropagation(); openDeleteModal('files', file); }} className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"><Trash2 size={14} /></button>
                  </div>
               </div>
@@ -586,7 +586,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
       
       {/* Demo Mode Indicator */}
       <div className="fixed top-32 left-1/2 -translate-x-1/2 z-40 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-4 py-1.5 rounded-full shadow-md animate-in slide-in-from-top-4 border border-white/10 flex items-center gap-2">
-        <Sparkles size={10} className="text-emerald-400" />
+        <Sparkles size={10} className="text-red-400" />
         DEMO MODE — DATA IS NOT SAVED PERMANENTLY
       </div>
 
@@ -600,14 +600,14 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
          </div>
          <div className="flex items-center gap-3">
              <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-full shadow-sm">
-                <div className="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center font-bold text-xs">{getInitials(user.displayName)}</div>
+                <div className="w-6 h-6 bg-red-100 text-red-900 rounded-full flex items-center justify-center font-bold text-xs">{getInitials(user.displayName)}</div>
                 <span className="text-sm font-medium text-slate-700">{user.displayName}</span>
              </div>
              <div className="relative" ref={dropdownRef}>
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="p-2 bg-white border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"><ChevronDown size={20} /></button>
                 {isDropdownOpen && (
                    <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl z-50 animate-in fade-in zoom-in-95 overflow-hidden">
-                      <button onClick={() => { setIsDropdownOpen(false); setIsUpgradeModalOpen(true); }} className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-emerald-600 font-medium">Upgrade Plan</button>
+                      <button onClick={() => { setIsDropdownOpen(false); setIsUpgradeModalOpen(true); }} className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-red-900 font-medium">Upgrade Plan</button>
                       <div className="border-t border-slate-100 my-1" />
                       <button onClick={() => onNavigate('/')} className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 font-medium flex items-center gap-2"><LogOut size={14} /> Exit Demo</button>
                    </div>
@@ -631,7 +631,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
       
       {activeTab === 'notes' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-2">
-            <button onClick={() => openModal('note')} className="h-48 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:border-emerald-500 hover:text-emerald-600 hover:bg-emerald-50/50 transition-all group">
+            <button onClick={() => openModal('note')} className="h-48 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:border-red-500 hover:text-red-900 hover:bg-red-50/50 transition-all group">
                 <StickyNote className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
                 <span className="font-semibold text-sm">New Note</span>
             </button>
@@ -657,7 +657,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                 {members.map(member => (
                     <div key={member.id} className="grid grid-cols-12 gap-4 px-6 py-4 border-b border-slate-50 hover:bg-slate-50 items-center group relative">
                         <div className="col-span-5 flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">{getInitials(member.name)}</div>
+                            <div className="w-8 h-8 rounded-full bg-red-100 text-red-900 flex items-center justify-center font-bold text-xs">{getInitials(member.name)}</div>
                             <span className="text-sm font-medium text-slate-900">{member.name}</span>
                         </div>
                         <div className="col-span-4 text-sm text-slate-500">{member.email}</div>
@@ -669,7 +669,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                 ))}
             </div>
             <div className="mt-6 text-center">
-                 <button onClick={() => openModal('member')} className="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-500">Invite Member</button>
+                 <button onClick={() => openModal('member')} className="px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-500">Invite Member</button>
             </div>
         </div>
       )}
@@ -686,11 +686,11 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                 <div className="p-6 space-y-4">
                    {modalOpen.type === 'file' ? (
                       <div className="space-y-4">
-                         <div onClick={() => fileInputRef.current?.click()} className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 hover:border-emerald-500 transition-colors">
+                         <div onClick={() => fileInputRef.current?.click()} className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center cursor-pointer hover:bg-slate-50 hover:border-red-500 transition-colors">
                             <input type="file" className="hidden" ref={fileInputRef} onChange={handleFileSelect} />
                             {selectedFile ? (
                                <div>
-                                  <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2"><FileIcon size={24} /></div>
+                                  <div className="w-12 h-12 bg-red-100 text-red-900 rounded-full flex items-center justify-center mx-auto mb-2"><FileIcon size={24} /></div>
                                   <p className="font-medium text-slate-900 text-sm truncate max-w-[200px] mx-auto">{selectedFile.name}</p>
                                   <p className="text-xs text-slate-500 mt-1">{formatFileSize(selectedFile.size)}</p>
                                </div>
@@ -705,13 +705,13 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                          {selectedFile && (
                             <div className="space-y-1">
                                <label className="text-xs font-semibold text-slate-700 ml-1">File Name</label>
-                               <input type="text" value={newItemName} onChange={(e) => setNewItemName(e.target.value)} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 outline-none" />
+                               <input type="text" value={newItemName} onChange={(e) => setNewItemName(e.target.value)} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-500 focus:ring-2 outline-none" />
                             </div>
                          )}
                          {uploadProgress > 0 && (
                             <div className="space-y-1">
                                <div className="flex justify-between text-xs text-slate-500"><span>Uploading...</span><span>{uploadProgress}%</span></div>
-                               <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden"><div className="bg-emerald-500 h-full rounded-full transition-all duration-300" style={{ width: `${uploadProgress}%` }} /></div>
+                               <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden"><div className="bg-red-500 h-full rounded-full transition-all duration-300" style={{ width: `${uploadProgress}%` }} /></div>
                             </div>
                          )}
                       </div>
@@ -719,18 +719,18 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                       <>
                         <div className="space-y-1">
                            <label className="text-xs font-semibold text-slate-700 ml-1">Name</label>
-                           <input type="text" value={newItemName} onChange={(e) => setNewItemName(e.target.value)} placeholder={modalOpen.type === 'folder' ? 'New Folder' : ''} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 outline-none" autoFocus />
+                           <input type="text" value={newItemName} onChange={(e) => setNewItemName(e.target.value)} placeholder={modalOpen.type === 'folder' ? 'New Folder' : ''} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-500 focus:ring-2 outline-none" autoFocus />
                         </div>
                         {modalOpen.type === 'note' && (
                            <div className="space-y-1">
                               <label className="text-xs font-semibold text-slate-700 ml-1">Content</label>
-                              <textarea value={newItemContent} onChange={(e) => setNewItemContent(e.target.value)} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 outline-none h-32 resize-none" placeholder="Write your note here..." />
+                              <textarea value={newItemContent} onChange={(e) => setNewItemContent(e.target.value)} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-500 focus:ring-2 outline-none h-32 resize-none" placeholder="Write your note here..." />
                            </div>
                         )}
                         {modalOpen.type === 'member' && (
                            <div className="space-y-1">
                               <label className="text-xs font-semibold text-slate-700 ml-1">Role</label>
-                              <select value={newItemRole} onChange={(e) => setNewItemRole(e.target.value)} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-emerald-500 focus:ring-2 outline-none bg-white">
+                              <select value={newItemRole} onChange={(e) => setNewItemRole(e.target.value)} className="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:border-red-500 focus:ring-2 outline-none bg-white">
                                  <option value="Viewer">Viewer</option><option value="Editor">Editor</option><option value="Admin">Admin</option>
                               </select>
                            </div>
@@ -739,7 +739,7 @@ const DemoDashboard: React.FC<DemoDashboardProps> = ({ onNavigate }) => {
                    )}
                    <div className="pt-2 flex gap-3">
                       <button onClick={closeModal} className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50">Cancel</button>
-                      <button onClick={handleCreate} disabled={isSubmitting || (modalOpen.type === 'file' && !selectedFile)} className="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-500 disabled:opacity-50 flex items-center justify-center gap-2">
+                      <button onClick={handleCreate} disabled={isSubmitting || (modalOpen.type === 'file' && !selectedFile)} className="flex-1 py-2.5 rounded-xl bg-red-900 text-white font-semibold text-sm hover:bg-red-500 disabled:opacity-50 flex items-center justify-center gap-2">
                          {isSubmitting ? <Loader2 className="animate-spin w-4 h-4" /> : (modalOpen.type === 'file' ? 'Upload' : 'Create')}
                       </button>
                    </div>
