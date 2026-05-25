@@ -5,12 +5,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCeHJd0BtuOzyuKRdoMU6mhvAgSQBQOVxI",
-  authDomain: "voltflow-eacb3.firebaseapp.com",
-  projectId: "voltflow-eacb3",
-  storageBucket: "voltflow-eacb3.firebasestorage.app",
-  messagingSenderId: "364332599746",
-  appId: "1:364332599746:web:2ffe67ed9bf7861faeae5b"
+  apiKey: "AIzaSyAAQgHSq3CeDszy_UPnbdc_Nyo3T4DH0B0",
+  authDomain: "sunnsafe-76140.firebaseapp.com",
+  projectId: "sunnsafe-76140",
+  storageBucket: "sunnsafe-76140.firebasestorage.app",
+  messagingSenderId: "523352448723",
+  appId: "1:523352448723:web:2a73d1ca031bfe9977be26"
 };
 
 // Initialize Firebase
