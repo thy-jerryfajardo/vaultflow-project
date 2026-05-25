@@ -60,15 +60,14 @@ interface NoteItem {
   createdAt: Timestamp;
 }
 
-interface MemberItem {
+interface StudentItem {
   id: string;
   name: string;
   role: string;
-  email: string;
   createdAt: Timestamp;
 }
 
-type TabView = 'overview' | 'files' | 'notes' | 'team';
+type TabView = 'overview' | 'files' | 'notes' | 'students';
 type SortKey = 'name' | 'size' | 'createdAt';
 type SortDirection = 'asc' | 'desc';
 
@@ -103,8 +102,14 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   const [files, setFiles] = useState<FileItem[]>([]);
   const [folders, setFolders] = useState<FolderItem[]>([]);
   const [notes, setNotes] = useState<NoteItem[]>([]);
-  const [members, setMembers] = useState<MemberItem[]>([]);
+  const [students, setStudents] = useState<StudentItem[]>([]);
   const [loadingData, setLoadingData] = useState(true);
+
+  // Stat counts
+  const [folderCount, setFolderCount] = useState(0);
+  const [fileCount, setFileCount] = useState(0);
+  const [noteCount, setNoteCount] = useState(0);
+  const [studentCount, setStudentCount] = useState(0);
 
   // Preview & Versioning State
   const [previewFile, setPreviewFile] = useState<FileItem | null>(null);
@@ -116,7 +121,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
   // Create Modal States
   const [modalOpen, setModalOpen] = useState<{
-    type: 'folder' | 'file' | 'note' | 'member' | null;
+    type: 'folder' | 'file' | 'note' | 'student' | null;
   }>({ type: null });
 
   // Delete Modal States
@@ -153,31 +158,35 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     if (!user) return;
 
     const basePath = `users/${user.uid}`;
-    
+
     // 1. Fetch Folders & Files
     const qFolders = query(collection(db, `${basePath}/folders`), orderBy('createdAt', 'desc'));
     const qFiles = query(collection(db, `${basePath}/files`), orderBy('createdAt', 'desc'));
-    
+
     // 2. Fetch Notes
     const qNotes = query(collection(db, `${basePath}/notes`), orderBy('createdAt', 'desc'));
-    
-    // 3. Fetch Team
-    const qMembers = query(collection(db, `${basePath}/teamMembers`), orderBy('createdAt', 'desc'));
+
+    // 3. Fetch Students
+    const qStudents = query(collection(db, `${basePath}/students`), orderBy('createdAt', 'desc'));
 
     const unsubFolders = onSnapshot(qFolders, (snapshot) => {
       setFolders(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as FolderItem)));
+      setFolderCount(snapshot.size);
     });
 
     const unsubFiles = onSnapshot(qFiles, (snapshot) => {
       setFiles(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as FileItem)));
+      setFileCount(snapshot.size);
     });
 
     const unsubNotes = onSnapshot(qNotes, (snapshot) => {
       setNotes(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as NoteItem)));
+      setNoteCount(snapshot.size);
     });
 
-    const unsubMembers = onSnapshot(qMembers, (snapshot) => {
-      setMembers(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as MemberItem)));
+    const unsubStudents = onSnapshot(qStudents, (snapshot) => {
+      setStudents(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as StudentItem)));
+      setStudentCount(snapshot.size);
       setLoadingData(false);
     });
 
@@ -185,7 +194,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       unsubFolders();
       unsubFiles();
       unsubNotes();
-      unsubMembers();
+      unsubStudents();
     };
   }, [user]);
 
@@ -478,17 +487,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           createdAt: serverTimestamp()
         });
         closeModal();
-      } 
-      else if (modalOpen.type === 'member') {
-        await addDoc(collection(db, `${basePath}/teamMembers`), {
+      }
+      else if (modalOpen.type === 'student') {
+        await addDoc(collection(db, `${basePath}/students`), {
           name: newItemName,
           role: newItemRole,
-          email: newItemName.toLowerCase().replace(/\s/g, '') + '@sunnsafe.team', // Simulated email
           createdAt: serverTimestamp()
         });
         closeModal();
       }
-      
+
     } catch (err) {
       console.error("Error creating item:", err);
       setErrorMsg("An unexpected error occurred.");
@@ -499,7 +507,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     }
   };
 
-  const openModal = (type: 'folder' | 'file' | 'note' | 'member') => {
+  const openModal = (type: 'folder' | 'file' | 'note' | 'student') => {
     setNewItemName('');
     setNewItemContent('');
     setNewItemRole('Viewer');
@@ -523,58 +531,192 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
   // --- Render Sections ---
 
+  const renderNotes = () => {
+    const isEmpty = notes.length === 0;
+
+    return (
+      <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+        {/* Toolbar */}
+        <div className="flex justify-between items-center gap-4 mb-6">
+          <h2 className="text-xl font-bold text-slate-900">My Notes</h2>
+          <button
+            onClick={() => openModal('note')}
+            className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-zinc-900/20"
+          >
+            <Plus size={16} />
+            New Note
+          </button>
+        </div>
+
+        {/* Empty State */}
+        {isEmpty ? (
+          <div className="text-center py-20 bg-white border border-slate-200 rounded-lg border-dashed">
+            <StickyNote className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <h3 className="text-slate-900 font-medium">No notes yet</h3>
+            <p className="text-slate-500 text-sm mb-4">Create your first note to get started.</p>
+            <button
+              onClick={() => openModal('note')}
+              className="px-4 py-2 bg-zinc-900 text-white rounded-lg text-sm font-semibold hover:bg-zinc-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-zinc-900/20"
+            >
+              Create Note
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {notes.map(note => (
+              <div
+                key={note.id}
+                className={`${note.color} p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 group relative`}
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <h3 className="text-lg font-bold text-slate-900 flex-1 pr-4 line-clamp-2">{note.title}</h3>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openDeleteModal('notes', note);
+                    }}
+                    className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all opacity-0 group-hover:opacity-100 hover:-translate-y-1 hover:scale-105 active:scale-95"
+                    title="Delete"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+                <p className="text-slate-700 text-sm line-clamp-4 mb-4">{note.content}</p>
+                <p className="text-xs text-slate-500">{formatDate(note.createdAt)}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderStudents = () => {
+    const isEmpty = students.length === 0;
+
+    return (
+      <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+        {/* Toolbar */}
+        <div className="flex justify-between items-center gap-4 mb-6">
+          <h2 className="text-xl font-bold text-slate-900">Students</h2>
+          <button
+            onClick={() => openModal('student')}
+            className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-zinc-900/20"
+          >
+            <Plus size={16} />
+            Add Student
+          </button>
+        </div>
+
+        {/* Empty State */}
+        {isEmpty ? (
+          <div className="text-center py-20 bg-white border border-slate-200 rounded-lg border-dashed">
+            <Users className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <h3 className="text-slate-900 font-medium">No students yet</h3>
+            <p className="text-slate-500 text-sm mb-4">Add students to start collaborating.</p>
+            <button
+              onClick={() => openModal('student')}
+              className="px-4 py-2 bg-zinc-900 text-white rounded-lg text-sm font-semibold hover:bg-zinc-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-zinc-900/20"
+            >
+              Add Student
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {students.map(student => (
+              <div
+                key={student.id}
+                className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200 group"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-slate-900">{student.name}</h3>
+                    <p className="text-sm text-slate-500 mt-1">{student.role}</p>
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openDeleteModal('students', student);
+                    }}
+                    className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all opacity-0 group-hover:opacity-100 hover:-translate-y-1 hover:scale-105 active:scale-95"
+                    title="Delete"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+                <p className="text-xs text-slate-400">Joined {formatDate(student.createdAt)}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const renderOverview = () => (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {/* Security Card */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {/* Total Folders Card */}
         <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-          <div className="w-10 h-10 bg-red-50 text-red-900 rounded-lg flex items-center justify-center mb-4">
-            <Shield size={20} />
+          <div className="w-10 h-10 bg-zinc-100 text-zinc-900 rounded-lg flex items-center justify-center mb-4">
+            <FolderPlus size={20} />
           </div>
-          <h3 className="text-lg font-bold text-slate-900 mb-1">Vault Status</h3>
-          <p className="text-sm text-slate-500 mb-4">Your environment is secure and encrypted.</p>
-          <div className="flex items-center gap-2 text-xs font-semibold text-red-900 bg-red-50 px-2 py-1 rounded-lg w-fit">
-            <div className="w-1.5 h-1.5 rounded-full bg-red-800" />
-            Active Protection
+          <h3 className="text-lg font-bold text-slate-900 mb-1">Total Folders</h3>
+          <p className="text-sm text-slate-500 mb-4">{folderCount} folders in your workspace.</p>
+          <div className="flex items-center gap-2 text-xs font-semibold text-zinc-900 bg-zinc-100 px-2 py-1 rounded-lg w-fit">
+            <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+            Active
           </div>
         </div>
 
-        {/* Storage Card */}
+        {/* Total Files Card */}
         <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
           <div className="w-10 h-10 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center mb-4">
-            <HardDrive size={20} />
+            <FileText size={20} />
           </div>
-          <h3 className="text-lg font-bold text-slate-900 mb-1">Storage</h3>
-          <p className="text-sm text-slate-500 mb-4">{files.length} files stored in your cloud vault.</p>
+          <h3 className="text-lg font-bold text-slate-900 mb-1">Total Files</h3>
+          <p className="text-sm text-slate-500 mb-4">{fileCount} files stored in your workspace.</p>
           <div className="w-full bg-slate-100 rounded-full h-1.5 mb-2">
-            <div className="bg-purple-500 h-1.5 rounded-full" style={{ width: `${Math.min(files.length * 2, 100)}%` }} />
+            <div className="bg-purple-500 h-1.5 rounded-full" style={{ width: `${Math.min(fileCount * 2, 100)}%` }} />
           </div>
-          <span className="text-xs text-slate-400">Standard Plan</span>
+          <span className="text-xs text-slate-400">Storage</span>
         </div>
 
-        {/* Team Card */}
+        {/* Total Notes Card */}
+        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="w-10 h-10 bg-yellow-50 text-yellow-600 rounded-lg flex items-center justify-center mb-4">
+            <StickyNote size={20} />
+          </div>
+          <h3 className="text-lg font-bold text-slate-900 mb-1">Total Notes</h3>
+          <p className="text-sm text-slate-500 mb-4">{noteCount} notes in your workspace.</p>
+          <button onClick={() => setActiveTab('notes')} className="text-sm font-semibold text-yellow-600 hover:text-yellow-700">
+            View Notes
+          </button>
+        </div>
+
+        {/* Total Students Card */}
         <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
           <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-4">
              <Users size={20} />
           </div>
-          <h3 className="text-lg font-bold text-slate-900 mb-1">Team Access</h3>
-          <p className="text-sm text-slate-500 mb-4">{members.length} active members in this workspace.</p>
-          <button onClick={() => setActiveTab('team')} className="text-sm font-semibold text-blue-600 hover:text-blue-700">
-            Manage Team
+          <h3 className="text-lg font-bold text-slate-900 mb-1">Total Students</h3>
+          <p className="text-sm text-slate-500 mb-4">{studentCount} students in this workspace.</p>
+          <button onClick={() => setActiveTab('students')} className="text-sm font-semibold text-blue-600 hover:text-blue-700">
+            Manage Students
           </button>
         </div>
       </div>
 
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-red-800/10 rounded-full blur-3xl -mr-16 -mt-16" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-zinc-800/10 rounded-full blur-3xl -mr-16 -mt-16" />
         <div className="relative z-10">
-           <h3 className="text-xl font-bold mb-2">Welcome to SunnSafe 2.0</h3>
+           <h3 className="text-xl font-bold mb-2">Welcome to SunnSafe</h3>
            <p className="text-slate-400 max-w-lg mb-6">
-             You now have full access to the new file management system, secure notes, and team collaboration tools.
+             Your secure student workspace with full access to file management, notes, and student collaboration tools.
            </p>
            <button
              onClick={() => setActiveTab('files')}
-             className="px-6 py-2.5 bg-red-900 hover:bg-red-800 text-white rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20"
+             className="px-6 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-zinc-900/20"
            >
              Start Uploading
              <Upload size={16} />
@@ -679,7 +821,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
               <button
                 onClick={() => { setCurrentFolder(null); setSearchQuery(''); }}
-                className={`flex items-center hover:text-red-900 transition-colors ${!currentFolder && !isSearching ? 'font-bold text-slate-800' : ''}`}
+                className={`flex items-center hover:text-zinc-900 transition-colors ${!currentFolder && !isSearching ? 'font-bold text-slate-800' : ''}`}
               >
                 {!currentFolder && !isSearching && <Home size={16} className="mr-1.5" />}
                 My Files
@@ -690,7 +832,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   <ChevronRight size={14} className="text-slate-400 flex-shrink-0 mx-0.5" />
                   <button
                     onClick={() => { setCurrentFolder(folder); setSearchQuery(''); }}
-                     className={`hover:text-red-900 transition-colors whitespace-nowrap ${index === breadcrumbs.length - 1 ? 'font-bold text-slate-800' : ''}`}
+                     className={`hover:text-zinc-900 transition-colors whitespace-nowrap ${index === breadcrumbs.length - 1 ? 'font-bold text-slate-800' : ''}`}
                   >
                     {folder.name}
                   </button>
@@ -745,7 +887,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                     <span className="hidden sm:inline text-xs md:text-sm font-semibold text-slate-500">Free limit reached.</span>
                     <button
                         onClick={() => setIsUpgradeModalOpen(true)}
-                        className="px-3 py-2 bg-red-900 text-white rounded-lg text-xs md:text-sm font-bold hover:bg-red-800 transition-all duration-300 shadow-lg shadow-red-900/20 hover:-translate-y-1 hover:scale-105 active:scale-95"
+                        className="px-3 py-2 bg-zinc-900 text-white rounded-lg text-xs md:text-sm font-bold hover:bg-zinc-800 transition-all duration-300 shadow-lg shadow-zinc-900/20 hover:-translate-y-1 hover:scale-105 active:scale-95"
                     >
                         Upgrade
                     </button>
@@ -756,7 +898,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         // Keep current folder context even if searching to allow upload
                         openModal('file');
                     }}
-                    className="px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-red-900/20 whitespace-nowrap hover:-translate-y-1 hover:scale-105 active:scale-95"
+                    className="px-4 py-2 bg-zinc-900 text-white rounded-lg text-sm font-semibold hover:bg-zinc-800 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-zinc-900/20 whitespace-nowrap hover:-translate-y-1 hover:scale-105 active:scale-95"
                 >
                     <Upload size={16} />
                     <span className="hidden sm:inline">Add File</span>
@@ -840,7 +982,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         </button>
                         <button
                             onClick={() => openModal('file')}
-                            className="px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20"
+                            className="px-4 py-2 bg-zinc-900 text-white rounded-lg text-sm font-semibold hover:bg-zinc-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-zinc-900/20"
                         >
                             Upload File
                         </button>
@@ -872,7 +1014,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         onClick={(e) => e.stopPropagation()}
                         onBlur={() => saveRename('folders')}
                         autoFocus
-                        className="bg-white border border-red-900 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
+                        className="bg-white border border-zinc-900 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
                       />
                     ) : (
                       <span 
@@ -923,7 +1065,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                         onClick={(e) => e.stopPropagation()}
                         onBlur={() => saveRename('files')}
                         autoFocus
-                        className="bg-white border border-red-900 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
+                        className="bg-white border border-zinc-900 rounded px-2 py-0.5 text-sm text-slate-900 focus:outline-none w-full shadow-sm"
                       />
                     ) : (
                       <span 
@@ -984,11 +1126,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16 sm:mb-20 md:mb-24">
          <div>
             <h1 className="text-3xl font-bold text-slate-900 mb-2">Dashboard</h1>
-            <p className="text-slate-500">Manage your files and team members.</p>
+            <p className="text-slate-500">Manage your files, notes and students.</p>
          </div>
          <div className="flex items-center gap-3">
              <div className="flex items-center gap-2 px-3 py-1.5 bg-white border-2 border-slate-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-6 h-6 bg-red-100 text-red-900 rounded-lg flex items-center justify-center font-bold text-xs">
+                <div className="w-6 h-6 bg-zinc-100 text-zinc-900 rounded-lg flex items-center justify-center font-bold text-xs">
                     {getInitials(user?.displayName)}
                 </div>
                 <span className="text-sm font-medium text-slate-700">{user?.displayName || 'User'}</span>
@@ -1007,13 +1149,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                    <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-200 rounded-lg shadow-xl z-50 animate-in fade-in zoom-in-95 duration-200 overflow-hidden">
                       <button
                         onClick={() => { setIsDropdownOpen(false); setIsSettingsOpen(true); }}
-                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-red-900 font-medium transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-zinc-900 font-medium transition-colors"
                       >
                          Settings
                       </button>
                       <button
                         onClick={() => { setIsDropdownOpen(false); setIsUpgradeModalOpen(true); }}
-                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-red-900 font-medium transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-zinc-900 font-medium transition-colors"
                       >
                          Upgrade Plan
                       </button>
@@ -1052,38 +1194,24 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             Notes
          </button>
          <button
-            onClick={() => setActiveTab('team')}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 ${activeTab === 'team' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+            onClick={() => setActiveTab('students')}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 ${activeTab === 'students' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
          >
-            Team
+            Students
          </button>
       </div>
 
       {/* Main Content Area */}
       {loadingData ? (
          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 text-red-900 animate-spin" />
+            <Loader2 className="w-8 h-8 text-zinc-900 animate-spin" />
          </div>
       ) : (
          <>
            {activeTab === 'overview' && renderOverview()}
            {activeTab === 'files' && renderFiles()}
-           {activeTab === 'notes' && (
-              <div className="text-center py-20 bg-white border border-slate-200 rounded-lg border-dashed">
-                 <StickyNote className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                 <h3 className="text-slate-900 font-medium">Notes</h3>
-                 <p className="text-slate-500 text-sm">Notes feature is coming soon.</p>
-                 <button onClick={() => openModal('note')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20">New Note</button>
-              </div>
-           )}
-           {activeTab === 'team' && (
-               <div className="text-center py-20 bg-white border border-slate-200 rounded-lg border-dashed">
-                 <Users className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                 <h3 className="text-slate-900 font-medium">Team Management</h3>
-                 <p className="text-slate-500 text-sm">Team feature is coming soon.</p>
-                  <button onClick={() => openModal('member')} className="mt-4 px-4 py-2 bg-red-900 text-white rounded-lg text-sm font-semibold hover:bg-red-800 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95 shadow-lg shadow-red-900/20">Add Member</button>
-              </div>
-           )}
+           {activeTab === 'notes' && renderNotes()}
+           {activeTab === 'students' && renderStudents()}
          </>
       )}
 
@@ -1095,7 +1223,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
              <div className="relative w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden animate-in fade-in zoom-in-95">
                 <div className="px-6 sm:px-8 py-4 sm:py-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                    <h3 className="font-bold text-slate-900 capitalize">
-                      {modalOpen.type === 'member' ? 'Add Team Member' : `Create New ${modalOpen.type}`}
+                      {modalOpen.type === 'student' ? 'Add Student' : `Create New ${modalOpen.type}`}
                    </h3>
                    <button onClick={closeModal} className="p-1 text-slate-400 hover:bg-slate-100 rounded-lg hover:text-slate-600 transition-all duration-300 hover:-translate-y-1 hover:scale-105 active:scale-95">
                       <X size={18} />
